@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.footer {
+	height: 100px;
+	background: $bg-color;
+
+	&__container {
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	&__course-github a {
+		display: inline-block;
+		width: 130px;
+		height: 50px;
+		background: url('./assets/svg/rss.svg') 0 0 / contain no-repeat;
+	}
+
+	&__my-github a {
+		color: $text-color-light;
+		font-size: 1.2rem;
+		text-transform: uppercase;
+	}
+}

@@ -1,5 +1,6 @@
 @import './styles/nullstyle';
 @import './app/common/header/header.scss';
+@import './app/common/footer/footer.scss';
 
 body {
 	font-family: 'Open Sans', sans-serif;
@@ -8,9 +9,16 @@ body {
 app-root {
 	width: 100%;
 	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .container {
+	padding: 0 10px;
 	max-width: 1600px;
 	margin: 0 auto;
+}
+
+.main {
+	margin-top: auto;
 }

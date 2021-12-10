@@ -1,5 +1,5 @@
 type ComponentType = { render: () => void }[];
-export type ObjectRenderType = [object, object];
+export type ObjectRenderType = [object, object, object];
 export class Module {
 	components: ObjectRenderType;
 
