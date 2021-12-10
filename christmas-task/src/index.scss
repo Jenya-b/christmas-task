@@ -1,0 +1,16 @@
+@import './styles/nullstyle';
+@import './app/common/header/header.scss';
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+app-root {
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	max-width: 1600px;
+	margin: 0 auto;
+}

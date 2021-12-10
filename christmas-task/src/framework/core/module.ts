@@ -1,9 +1,9 @@
-type componentType = { render: () => void }[];
-
+type ComponentType = { render: () => void }[];
+export type ObjectRenderType = [object, object];
 export class Module {
-	components: [key: object];
+	components: ObjectRenderType;
 
-	constructor(config: { components: [key: object] }) {
+	constructor(config: { components: ObjectRenderType }) {
 		this.components = config.components;
 	}
 
@@ -12,6 +12,6 @@ export class Module {
 	}
 
 	initComponent() {
-		(this.components as componentType).forEach((c) => c.render());
+		(this.components as ComponentType).forEach((c) => c.render());
 	}
 }

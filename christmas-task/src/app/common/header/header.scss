@@ -1,0 +1,82 @@
+@import '../../../styles/variables';
+
+.header {
+	height: 100px;
+	background: $bg-color;
+
+	&__container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__wrapper {
+		display: flex;
+		align-items: center;
+		column-gap: 40px;
+	}
+
+	&__logo {
+		width: 60px;
+		height: 80px;
+		background: url('./assets/svg/tree.svg') 0 0 / contain no-repeat;
+		cursor: pointer;
+		transition: all 0.3s;
+	}
+	&__logo:hover {
+		filter: invert(57%) sepia(100%) saturate(329%) hue-rotate(141deg) brightness(89%) contrast(90%);
+	}
+
+	&__search {
+		width: 380px;
+		height: 40px;
+		padding: 5px 25px;
+		border-radius: 20px;
+		border: 1px solid #278d9f;
+		color: #fff;
+		font-size: 18px;
+		background-color: rgba(31, 112, 127, 0.3);
+	}
+
+	&__counter {
+		width: 48px;
+		height: 60px;
+		background-image: url('./assets/svg/ball-2.svg');
+		background-size: 48px 60px;
+		background-position: left -8px;
+		background-repeat: no-repeat;
+	}
+	&__counter span {
+		display: inline-block;
+		min-width: 40px;
+		height: 40px;
+		margin-top: 10px;
+		margin-left: 4px;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 40px;
+		font-size: 20px;
+		color: $text-color-light;
+		background-color: #278d9f;
+	}
+}
+.menu {
+	&__list {
+		display: flex;
+		column-gap: 30px;
+	}
+
+	&__item {
+		font-size: 1.3rem;
+	}
+
+	&__link {
+		text-transform: uppercase;
+		transition: all 0.3s;
+		color: $text-color-light;
+	}
+
+	&__link:hover {
+		color: $text-hover;
+	}
+}
