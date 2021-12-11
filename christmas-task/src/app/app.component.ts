@@ -11,7 +11,7 @@ export const appComponent = new AppComponent({
 	selector: 'app-root',
 	template: `
 		<header class="header"></header>
-		<main class="main"></main>
+		<dinamic-page></dinamic-page>
 		<footer class="footer"></footer>
 	`,
 });

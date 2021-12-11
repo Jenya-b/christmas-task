@@ -12,14 +12,14 @@ export const appHeader = new AppHeader({
 	template: `
 		<div class="container header__container">
 			<div class="header__wrapper">
-				<div class="header__logo"></div>
+				<a href="#" class="header__logo"></a>
 				<nav class="header__menu menu">
 					<ul class="menu__list">
 						<li class="menu__item">
-							<a href="#" class="menu__link">Игрушки</a>
+							<a href="#decor" class="menu__link">Игрушки</a>
 						</li>
 						<li class="menu__item">
-							<a href="#" class="menu__link">Ёлки</a>
+							<a href="#tree" class="menu__link">Ёлки</a>
 						</li>
 					</ul>
 				</nav>
