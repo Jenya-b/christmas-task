@@ -10,7 +10,6 @@ interface IData {
 	color: string;
 	size: string;
 	favorite: boolean;
-	length: number;
 }
 type ComponentType = { render: () => void }[];
 type BootstrapComponentType = { render: () => void };
