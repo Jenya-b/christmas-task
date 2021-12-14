@@ -1,5 +1,5 @@
-import { appChristmasDecoration } from './pages/christmas-decoration/christmas-decoration';
-import { appHomePage } from './pages/home-page/home-page';
+import { appChristmasDecoration } from './pages/christmas-decoration';
+import { appHomePage } from './pages/home-page';
 
 export const appRoutes = [
 	{ path: '', component: appHomePage },

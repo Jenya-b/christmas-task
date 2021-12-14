@@ -1,8 +1,9 @@
 @import './styles/nullstyle';
-@import './app/common/header/header.scss';
-@import './app/common/footer/footer.scss';
-@import './app/pages/home-page/home-page.scss';
-@import './app/pages/christmas-decoration/christmas-decoration.scss';
+@import './styles/variables';
+@import './app/common/header/styles.scss';
+@import './app/common/footer/styles.scss';
+@import './app/pages/home-page/styles.scss';
+@import './app/pages/christmas-decoration/styles.scss';
 
 body {
 	font-family: 'Open Sans', sans-serif;
