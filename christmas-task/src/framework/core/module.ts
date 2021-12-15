@@ -52,7 +52,7 @@ export class Module {
 		) as HTMLElement).innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
 		this.renderComponent(route?.component);
 		if (route?.path === 'decor') {
-			this.addToysOnPage();
+			this.addCardToysOnPage();
 		}
 	}
 
@@ -67,7 +67,7 @@ export class Module {
 		return data as IData[];
 	}
 
-	async addToysOnPage() {
+	async addCardToysOnPage() {
 		const url = 'https://jenya-b.github.io/json/data.json';
 		const data = await this.getInfo(url);
 		const toysWrapper = document.querySelector('.gallery-toys__items') as HTMLElement;
@@ -77,46 +77,36 @@ export class Module {
 		}
 	}
 
-	getListContent(data: IData): HTMLDivElement[] {
-		const result = [];
+	getListContent(data: IData): HTMLElement[] {
+		const result: HTMLElement[] = [];
+		const list: HTMLElement[] = [];
+		const numberParameters = 6;
+		const cardParameters = [
+			['Количество', 'Год покупки', 'Форма', 'Цвет', 'Размер', 'Любимая'],
+			[data.count, data.year, data.shape, data.color, data.size, data.favorite],
+		];
 
 		const toy = document.createElement('div');
 		const name = document.createElement('h3');
 		const img = document.createElement('img');
 		const ul = document.createElement('ul');
-		const countLi = document.createElement('li');
-		const yearLi = document.createElement('li');
-		const shapeLi = document.createElement('li');
-		const colorLi = document.createElement('li');
-		const sizeLi = document.createElement('li');
-		const favoriteLi = document.createElement('li');
+
+		for (let i = 0; i < numberParameters; i++) {
+			const parameterName = cardParameters[0];
+			const parameterValue = cardParameters[1];
+			const li = document.createElement('li');
+			li.classList.add('toy__item');
+			li.innerText = `${parameterName[i]}: ${parameterValue[i]}`;
+			list.push(li);
+		}
 
 		toy.classList.add('gallery-toys__item', 'toy');
 		name.className = 'toy__name';
 		img.className = 'toy__image';
 		ul.className = 'toy__list';
-		countLi.className = 'toy__item';
-		yearLi.className = 'toy__item';
-		shapeLi.className = 'toy__item';
-		colorLi.className = 'toy__item';
-		sizeLi.className = 'toy__item';
-		favoriteLi.className = 'toy__item';
-
-		countLi.innerText = `Количество: ${data.count}`;
-		yearLi.innerText = `Год покупки: ${data.year}`;
-		shapeLi.innerText = `Форма: ${data.shape}`;
-		colorLi.innerText = `Цвет: ${data.color}`;
-		sizeLi.innerText = `Размер: ${data.size}`;
-		if (data.favorite) {
-			favoriteLi.innerText = `Любимая: да`;
-		} else {
-			favoriteLi.innerText = `Любимая: нет`;
-		}
 		img.src = `https://jenya-b.github.io/json/toys/${data.num}.png`;
-		ul.append(countLi, yearLi, shapeLi, colorLi, sizeLi, favoriteLi);
-
-		name.innerText = `${data.name}`;
-
+		name.innerText = data.name;
+		ul.append(...list);
 		toy.append(name, img, ul);
 		result.push(toy);
 
