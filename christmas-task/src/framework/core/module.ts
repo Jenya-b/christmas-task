@@ -1,5 +1,7 @@
 import { router } from '..';
 import { IComponent } from './component';
+import noUiSlider, { API, target } from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 
 interface IData {
 	num: string;
@@ -53,6 +55,8 @@ export class Module {
 		this.renderComponent(route?.component);
 		if (route?.path === 'decor') {
 			this.addCardToysOnPage();
+			this.setRangeOfInstances();
+			this.setRangeOfYears();
 		}
 	}
 
@@ -111,5 +115,57 @@ export class Module {
 		result.push(toy);
 
 		return result;
+	}
+
+	setRangeOfInstances() {
+		const rangeSlider = document.querySelector('#count-toys-slider') as target;
+		if (rangeSlider) {
+			noUiSlider.create(rangeSlider, {
+				start: [1, 12],
+				connect: true,
+				step: 1,
+				range: {
+					min: [1],
+					max: [12],
+				},
+			});
+
+			const input0 = document.querySelector('#count-range-0') as HTMLElement;
+			const input1 = document.querySelector('#count-range-1') as HTMLElement;
+
+			(<API>rangeSlider.noUiSlider).on('update', () => {
+				const outputValue = rangeSlider.noUiSlider.get() as string[];
+				if (outputValue) {
+					input0.textContent = parseInt(outputValue[0]).toString();
+					input1.textContent = parseInt(outputValue[1]).toString();
+				}
+			});
+		}
+	}
+
+	setRangeOfYears() {
+		const rangeSlider = document.querySelector('#year-toys-slider') as target;
+		if (rangeSlider) {
+			noUiSlider.create(rangeSlider, {
+				start: [1940, 2021],
+				connect: true,
+				step: 1,
+				range: {
+					min: [1940],
+					max: [2021],
+				},
+			});
+
+			const input0 = document.querySelector('#year-range-0') as HTMLElement;
+			const input1 = document.querySelector('#year-range-1') as HTMLElement;
+
+			(<API>rangeSlider.noUiSlider).on('update', () => {
+				const outputValue = rangeSlider.noUiSlider.get() as string[];
+				if (outputValue) {
+					input0.textContent = parseInt(outputValue[0]).toString();
+					input1.textContent = parseInt(outputValue[1]).toString();
+				}
+			});
+		}
 	}
 }

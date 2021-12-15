@@ -41,26 +41,36 @@ export const appChristmasDecoration = new AppChristmasDecoration({
 								<button></button>
 							</div>
 						</li>
-						<li class="sidebar-decor__item count-toys">
+						<li class="sidebar-decor__item">
 							<h3 class="sidebar-decor__title">Колличество экземпляров:</h3>
-							<div class="count-toys__wrapper"></div>
+							<div class="slider sidebar-decor__slider">
+								<div class="slider__border" id="count-range-0"></div>
+								<div class="slider__range" id="count-toys-slider"></div>
+								<div class="slider__border" id="count-range-1"></div>
+							</div>
 						</li>
-						<li class="sidebar-decor__item year-toys">
+						<li class="sidebar-decor__item">
 							<h3 class="sidebar-decor__title">Год приобретения:</h3>
-							<div class="year-toys__wrapper"></div>
+							<div class="slider sidebar-decor__slider">
+								<div class="slider__border" id="year-range-0"></div>
+								<div class="slider__range" id="year-toys-slider"></div>
+								<div class="slider__border" id="year-range-1"></div></div>
 						</li>
 						<li class="sidebar-decor__item like-toys">
 							<h3 class="sidebar-decor__title">Только любимые:</h3>
-							<input type="checkbox" />
+							<input type="checkbox" class="like-toys__checkbox" id="like-toys" />
+							<label for="like-toys" class="like-toys__label"></label>
 						</li>
 					</ul>
-					<button>Сбросить настройки</button>
+					<button class="settings-reset">Сбросить настройки</button>
 				</aside>
 				<article class="decoration__content content-decor">
 					<h1 class="content-decor__title">Бабушкины украшения</h1>
 					<select class="content-decor__select">
-						<option>Пункт 1</option>
-						<option>Пункт 2</option>
+						<option>По названию от «А» до «Я»</option>
+						<option>По названию от «Я» до «А»</option>
+						<option>По количеству по возрастанию</option>
+						<option>По количеству по убыванию</option>
 					</select>
 					<section class="content-decor__gallery gallery-toys">
 						<h2 class="gallery-toys__title">Игрушки</h2>

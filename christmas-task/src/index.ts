@@ -1,3 +1,4 @@
+import 'nouislider/dist/nouislider.css';
 import './index.scss';
 
 import { appModule } from './app/app.module';
