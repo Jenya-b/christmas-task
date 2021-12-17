@@ -137,6 +137,9 @@ export class Module {
 				if (outputValue) {
 					input0.textContent = parseInt(outputValue[0]).toString();
 					input1.textContent = parseInt(outputValue[1]).toString();
+					const arr = [input0.textContent, input1.textContent];
+					const countList = document.querySelectorAll('.toy__item-count');
+					this.sortByNumber(arr, countList);
 				}
 			});
 		}
@@ -166,5 +169,30 @@ export class Module {
 				}
 			});
 		}
+	}
+
+	sortByNumber(arr: string[], countList: NodeListOf<Element>) {
+		const leftBorder = Number(arr[0]);
+		const rightBorder = Number(arr[1]);
+
+		for (let i = 0; i < countList.length; i++) {
+			const element = countList[i] as HTMLElement;
+			const parentElementClass = 'toy';
+			const parentElement = this.findAncestor(element, parentElementClass);
+			const number = Number(element.textContent?.replace(/\D/gi, ''));
+
+			if (number < leftBorder || number > rightBorder) {
+				parentElement.classList.add('hide');
+			} else {
+				parentElement.classList.remove('hide');
+			}
+		}
+	}
+
+	findAncestor(el: HTMLElement, cls: string) {
+		while (!el.classList.contains(cls)) {
+			el = el.parentElement as HTMLElement;
+		}
+		return el;
 	}
 }

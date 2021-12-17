@@ -222,6 +222,10 @@ input::-webkit-inner-spin-button {
 	}
 }
 .toy {
+	&.hide {
+		display: none;
+	}
+
 	padding: 30px 20px;
 	display: grid;
 	grid-template: auto 1fr / 100px 1fr;
