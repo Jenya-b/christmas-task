@@ -84,23 +84,22 @@ export class Module {
 	getListContent(data: IData): HTMLElement[] {
 		const result: HTMLElement[] = [];
 		const list: HTMLElement[] = [];
-		const numberParameters = 6;
-		const cardParameters = [
-			['Количество', 'Год покупки', 'Форма', 'Цвет', 'Размер', 'Любимая'],
-			[data.count, data.year, data.shape, data.color, data.size, data.favorite],
-		];
+
+		type TKey = keyof typeof data;
+		const arrNames = ['Количество', 'Год покупки', 'Форма', 'Цвет', 'Размер', 'Любимая'];
+		const arrValues: TKey[] = ['count', 'year', 'shape', 'color', 'size', 'favorite'];
 
 		const toy = document.createElement('div');
 		const name = document.createElement('h3');
 		const img = document.createElement('img');
 		const ul = document.createElement('ul');
 
-		for (let i = 0; i < numberParameters; i++) {
-			const parameterName = cardParameters[0];
-			const parameterValue = cardParameters[1];
+		for (let i = 0; i < arrValues.length; i++) {
+			const parameterName = arrNames[i];
+			const parameterValue = data[arrValues[i]];
 			const li = document.createElement('li');
-			li.classList.add('toy__item');
-			li.innerText = `${parameterName[i]}: ${parameterValue[i]}`;
+			li.classList.add(`toy__item`, `toy__item-${arrValues[i]}`);
+			li.innerText = `${parameterName}: ${parameterValue}`;
 			list.push(li);
 		}
 
