@@ -252,10 +252,11 @@ export class Module {
 			const filterByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
 			const filterByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
 			const filterByFavorite = this.filterByFavoriteToys(favoriteToys[i]);
-			const visualFiltering = this.performVisualFiltering(shapeToys[i], colorToys[i], sizeToys[i]);
+			const filterShape = this.filterShapeToy(shapeToys[i]);
+			const filterColor = this.filterColorToy(colorToys[i]);
 			const toy = toys[i];
 
-			if (filterByCountToys || filterByYearToys || filterByFavorite || !visualFiltering) {
+			if (filterByCountToys || filterByYearToys || filterByFavorite || !filterShape || !filterColor) {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
@@ -290,14 +291,6 @@ export class Module {
 		this.filterToys();
 	}
 
-	performVisualFiltering(elementShape: Element, elementColor: Element, elementSize: Element) {
-		const filterShape = this.filterShapeToy(elementShape);
-		if (filterShape) {
-			return true;
-		}
-		return false;
-	}
-
 	filterShapeToy(elementShape: Element) {
 		const formToyButtons = document.querySelectorAll('.form-toys__button');
 		const obj: TObjFilterButton = {
@@ -320,6 +313,31 @@ export class Module {
 			}
 		}
 		if (a == formToyButtons.length) return true;
+		return false;
+	}
+
+	filterColorToy(elementColor: Element) {
+		const colorToyButtons = document.querySelectorAll('.color-toys__button');
+		const obj: TObjFilterButton = {
+			white: 'белый',
+			yellow: 'желтый',
+			red: 'красный',
+			green: 'зелёный',
+			blue: 'синий',
+		};
+		const regexp = /белый|желтый|красный|зелёный|синий/gi;
+		const elementInfo = elementColor.textContent?.match(regexp)?.join('') as string;
+		let a = 0;
+
+		for (let i = 0; i < colorToyButtons.length; i++) {
+			const button = colorToyButtons[i];
+			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
+				return true;
+			} else if (!button.classList.contains('active')) {
+				a++ as number;
+			}
+		}
+		if (a == colorToyButtons.length) return true;
 		return false;
 	}
 }
