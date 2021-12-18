@@ -60,8 +60,8 @@ export class Module {
 		if (route?.path === 'decor') {
 			this.setInfoForButtons();
 			this.addCardToysOnPage();
-			this.setRangeOfInstances();
-			this.setRangeOfYears();
+			this.setRangeOfInstances(1, 12);
+			this.setRangeOfYears(1940, 2021);
 		}
 
 		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
@@ -83,6 +83,9 @@ export class Module {
 		sizeToyButtons.forEach((el) => {
 			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
 		});
+
+		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
+		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -179,16 +182,16 @@ export class Module {
 		parentElement.append(...result);
 	}
 
-	setRangeOfInstances() {
+	setRangeOfInstances(min: number, max: number) {
 		const rangeSlider = document.querySelector('#count-toys-slider') as target;
 		if (rangeSlider) {
 			noUiSlider.create(rangeSlider, {
-				start: [1, 12],
+				start: [min, max],
 				connect: true,
 				step: 1,
 				range: {
-					min: [1],
-					max: [12],
+					min: [min],
+					max: [max],
 				},
 			});
 
@@ -203,19 +206,23 @@ export class Module {
 					this.filterToys();
 				}
 			});
+			const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
+			buttonSettingsReset.addEventListener('click', () => {
+				rangeSlider.noUiSlider.reset();
+			});
 		}
 	}
 
-	setRangeOfYears() {
+	setRangeOfYears(min: number, max: number) {
 		const rangeSlider = document.querySelector('#year-toys-slider') as target;
 		if (rangeSlider) {
 			noUiSlider.create(rangeSlider, {
-				start: [1940, 2021],
+				start: [min, max],
 				connect: true,
 				step: 1,
 				range: {
-					min: [1940],
-					max: [2021],
+					min: [min],
+					max: [max],
 				},
 			});
 
@@ -231,6 +238,10 @@ export class Module {
 				}
 			});
 		}
+		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
+		buttonSettingsReset.addEventListener('click', () => {
+			rangeSlider.noUiSlider.reset();
+		});
 	}
 
 	filterToys() {
@@ -349,5 +360,23 @@ export class Module {
 		}
 		if (a === buttons.length) return true;
 		return false;
+	}
+
+	resetFilters() {
+		const formToyButtons = document.querySelectorAll('.form-toys__button');
+		const colorToyButtons = document.querySelectorAll('.color-toys__button');
+		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
+		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+
+		formToyButtons.forEach((el) => this.resetActiveClass(el));
+		colorToyButtons.forEach((el) => this.resetActiveClass(el));
+		sizeToyButtons.forEach((el) => this.resetActiveClass(el));
+		inputCheckbox.checked = false;
+
+		this.filterToys();
+	}
+
+	resetActiveClass(el: Element) {
+		el.classList.remove('active');
 	}
 }
