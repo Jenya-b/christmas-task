@@ -57,6 +57,10 @@ export class Module {
 			this.addCardToysOnPage();
 			this.setRangeOfInstances();
 			this.setRangeOfYears();
+			const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+			inputCheckbox.addEventListener('change', () => {
+				this.filterToys();
+			});
 		}
 	}
 
@@ -99,7 +103,15 @@ export class Module {
 			const parameterValue = data[arrValues[i]];
 			const li = document.createElement('li');
 			li.classList.add(`toy__item`, `toy__item-${arrValues[i]}`);
-			li.innerText = `${parameterName}: ${parameterValue}`;
+			if (arrValues[i] === 'favorite') {
+				if (parameterValue) {
+					li.innerText = `${parameterName}: да`;
+				} else {
+					li.innerText = `${parameterName}: нет`;
+				}
+			} else {
+				li.innerText = `${parameterName}: ${parameterValue}`;
+			}
 			list.push(li);
 		}
 
@@ -180,13 +192,15 @@ export class Module {
 		const yearLeftBorder = document.querySelector('#year-range-0') as HTMLElement;
 		const yearRightBorder = document.querySelector('#year-range-1') as HTMLElement;
 		const arrYearBorder = [yearLeftBorder.textContent as string, yearRightBorder.textContent as string];
+		const favoriteToys = document.querySelectorAll('.toy__item-favorite');
 
 		for (let i = 0; i < toys.length; i++) {
 			const sortByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
 			const sortByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
+			const filterByFavorite = this.filterByFavoriteToys(favoriteToys[i]);
 			const toy = toys[i];
 
-			if (sortByCountToys || sortByYearToys) {
+			if (sortByCountToys || sortByYearToys || filterByFavorite) {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
@@ -198,8 +212,18 @@ export class Module {
 		const leftBorder = Number(arr[0]);
 		const rightBorder = Number(arr[1]);
 		const number = Number(element.textContent?.replace(/\D/gi, ''));
-
 		if (number < leftBorder || number > rightBorder) {
+			return true;
+		}
+		return false;
+	}
+
+	filterByFavoriteToys(element: Element) {
+		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+		const value = element.textContent as string;
+		const regexp = /: нет/i;
+
+		if (inputCheckbox.checked && regexp.test(value)) {
 			return true;
 		}
 		return false;
