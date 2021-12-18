@@ -53,16 +53,33 @@ export class Module {
 			'dinamic-page'
 		) as HTMLElement).innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
 		this.renderComponent(route?.component);
+
 		if (route?.path === 'decor') {
 			this.setInfoForButtons();
 			this.addCardToysOnPage();
 			this.setRangeOfInstances();
 			this.setRangeOfYears();
-			const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
-			inputCheckbox.addEventListener('change', () => {
-				this.filterToys();
-			});
 		}
+
+		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+		inputCheckbox.addEventListener('change', () => {
+			this.filterToys();
+		});
+
+		const formToyButtons = document.querySelectorAll('.form-toys__button');
+		formToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
+
+		const colorToyButtons = document.querySelectorAll('.color-toys__button');
+		colorToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
+
+		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
+		sizeToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -258,5 +275,10 @@ export class Module {
 			return true;
 		}
 		return false;
+	}
+
+	addActiveStyle(e: EventTarget) {
+		const element = e as HTMLElement;
+		element.classList.toggle('active');
 	}
 }

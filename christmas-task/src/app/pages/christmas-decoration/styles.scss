@@ -69,6 +69,9 @@ input::-webkit-inner-spin-button {
 	&__button:nth-child(4) {
 		background: url('./assets/svg/toy.svg') 0 0 / contain no-repeat;
 	}
+	&__button.active {
+		filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
+	}
 }
 .color-toys {
 	&__wrapper {
@@ -77,6 +80,7 @@ input::-webkit-inner-spin-button {
 		column-gap: 21px;
 	}
 	&__button {
+		position: relative;
 		width: 30px;
 		height: 30px;
 		border-radius: 5px;
@@ -95,6 +99,23 @@ input::-webkit-inner-spin-button {
 	}
 	&__button:nth-child(4) {
 		background: #08aa05;
+	}
+	&__button.active::after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 6px;
+		left: 10px;
+		width: 8px;
+		height: 13px;
+		border: solid #fff;
+		border-width: 0 4px 4px 0;
+		transform: rotate(45deg);
+	}
+	&__white.active::after {
+		border: solid rgb(167, 160, 160);
+		border-width: 0 4px 4px 0;
+		transform: rotate(45deg);
 	}
 }
 .size-toys {
@@ -118,6 +139,9 @@ input::-webkit-inner-spin-button {
 	&__button:nth-child(3) {
 		width: 30px;
 		height: 30px;
+	}
+	&__button.active {
+		filter: invert(9%) sepia(63%) saturate(461%) hue-rotate(322deg) brightness(83%) contrast(88%);
 	}
 }
 .count-toys {
