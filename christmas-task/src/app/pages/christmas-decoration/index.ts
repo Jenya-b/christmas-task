@@ -16,29 +16,19 @@ export const appChristmasDecoration = new AppChristmasDecoration({
 						<li class="sidebar-decor__item form-toys">
 							<h3 class="sidebar-decor__title">Форма:</h3>
 							<div class="form-toys__wrapper">
-								<button></button>
-								<button></button>
-								<button></button>
-								<button></button>
-								<button></button>
+					
 							</div>
 						</li>
 						<li class="sidebar-decor__item color-toys">
 							<h3 class="sidebar-decor__title">Цвет:</h3>
 							<div class="color-toys__wrapper">
-								<button></button>
-								<button></button>
-								<button></button>
-								<button></button>
-								<button></button>
+
 							</div>
 						</li>
 						<li class="sidebar-decor__item size-toys">
 							<h3 class="sidebar-decor__title">Размер:</h3>
 							<div class="size-toys__wrapper">
-								<button></button>
-								<button></button>
-								<button></button>
+
 							</div>
 						</li>
 						<li class="sidebar-decor__item">

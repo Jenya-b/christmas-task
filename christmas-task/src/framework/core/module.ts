@@ -54,6 +54,7 @@ export class Module {
 		) as HTMLElement).innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
 		this.renderComponent(route?.component);
 		if (route?.path === 'decor') {
+			this.setInfoForButtons();
 			this.addCardToysOnPage();
 			this.setRangeOfInstances();
 			this.setRangeOfYears();
@@ -126,6 +127,36 @@ export class Module {
 		result.push(toy);
 
 		return result;
+	}
+
+	setInfoForButtons() {
+		const formButtonsWrapper = document.querySelector('.form-toys__wrapper') as HTMLElement;
+		const formArr = ['ball', 'bell', 'cone', 'snowflake', 'toy'];
+		const formClassName = 'form-toys';
+		this.createFilterButtonsForm(formButtonsWrapper, formArr, formClassName);
+
+		const colorButtonsWrapper = document.querySelector('.color-toys__wrapper') as HTMLElement;
+		const colorArr = ['white', 'yellow', 'red', 'green', 'blue'];
+		const colorClassName = 'color-toys';
+		this.createFilterButtonsForm(colorButtonsWrapper, colorArr, colorClassName);
+
+		const sizeButtonsWrapper = document.querySelector('.size-toys__wrapper') as HTMLElement;
+		const sizeArr = ['big', 'average', 'little'];
+		const sizeClassName = 'size-toys';
+		this.createFilterButtonsForm(sizeButtonsWrapper, sizeArr, sizeClassName);
+	}
+
+	createFilterButtonsForm(parentElement: HTMLElement, arr: string[], className: string) {
+		const result: HTMLElement[] = [];
+
+		for (let i = 0; i < arr.length; i++) {
+			const button = document.createElement('button');
+			button.classList.add(`${className}__button`, `${className}__${arr[i]}`);
+			button.id = arr[i];
+			result.push(button);
+		}
+
+		parentElement.append(...result);
 	}
 
 	setRangeOfInstances() {

@@ -50,23 +50,23 @@ input::-webkit-inner-spin-button {
 		display: flex;
 		column-gap: 15px;
 	}
-	&__wrapper button {
+	&__button {
 		width: 35px;
 		height: 35px;
 	}
-	&__wrapper button:nth-child(1) {
+	&__button:nth-child(1) {
 		background: url('./assets/svg/ball.svg') 0 0 / contain no-repeat;
 	}
-	&__wrapper button:nth-child(2) {
+	&__button:nth-child(2) {
 		background: url('./assets/svg/bell.svg') 0 0 / contain no-repeat;
 	}
-	&__wrapper button:nth-child(3) {
+	&__button:nth-child(3) {
 		background: url('./assets/svg/cone.svg') 0 0 / contain no-repeat;
 	}
-	&__wrapper button:nth-child(5) {
+	&__button:nth-child(5) {
 		background: url('./assets/svg/snowflake.svg') 0 0 / contain no-repeat;
 	}
-	&__wrapper button:nth-child(4) {
+	&__button:nth-child(4) {
 		background: url('./assets/svg/toy.svg') 0 0 / contain no-repeat;
 	}
 }
@@ -76,24 +76,24 @@ input::-webkit-inner-spin-button {
 		display: flex;
 		column-gap: 21px;
 	}
-	&__wrapper button {
+	&__button {
 		width: 30px;
 		height: 30px;
 		border-radius: 5px;
 	}
-	&__wrapper button:nth-child(1) {
+	&__button:nth-child(1) {
 		background: #ffffff;
 	}
-	&__wrapper button:nth-child(2) {
+	&__button:nth-child(2) {
 		background: #fdd700;
 	}
-	&__wrapper button:nth-child(3) {
+	&__button:nth-child(3) {
 		background: #fd0000;
 	}
-	&__wrapper button:nth-child(5) {
+	&__button:nth-child(5) {
 		background: #2199eb;
 	}
-	&__wrapper button:nth-child(4) {
+	&__button:nth-child(4) {
 		background: #08aa05;
 	}
 }
@@ -104,18 +104,18 @@ input::-webkit-inner-spin-button {
 		align-items: center;
 		column-gap: 15px;
 	}
-	&__wrapper button {
+	&__button {
 		background: url('./assets/svg/ball.svg') 0 0 / contain no-repeat;
 	}
-	&__wrapper button:nth-child(1) {
+	&__button:nth-child(1) {
 		width: 40px;
 		height: 40px;
 	}
-	&__wrapper button:nth-child(2) {
+	&__button:nth-child(2) {
 		width: 35px;
 		height: 35px;
 	}
-	&__wrapper button:nth-child(3) {
+	&__button:nth-child(3) {
 		width: 30px;
 		height: 30px;
 	}
