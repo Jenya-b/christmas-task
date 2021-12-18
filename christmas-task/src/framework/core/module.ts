@@ -302,19 +302,9 @@ export class Module {
 			toy: 'фигурка',
 		};
 		const regexp = /шар|колокольчик|шишка|снежинка|фигурка/gi;
-		const elementInfo = elementShape.textContent?.match(regexp)?.join('') as string;
-		let a = 0;
 
-		for (let i = 0; i < formToyButtons.length; i++) {
-			const button = formToyButtons[i];
-			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
-				return true;
-			} else if (!button.classList.contains('active')) {
-				a++ as number;
-			}
-		}
-		if (a == formToyButtons.length) return true;
-		return false;
+		const booleanValue = this.getFilterValue(elementShape, regexp, formToyButtons, obj);
+		return booleanValue;
 	}
 
 	filterColorToy(elementColor: Element) {
@@ -327,19 +317,9 @@ export class Module {
 			blue: 'синий',
 		};
 		const regexp = /белый|желтый|красный|зелёный|синий/gi;
-		const elementInfo = elementColor.textContent?.match(regexp)?.join('') as string;
-		let a = 0;
 
-		for (let i = 0; i < colorToyButtons.length; i++) {
-			const button = colorToyButtons[i];
-			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
-				return true;
-			} else if (!button.classList.contains('active')) {
-				a++ as number;
-			}
-		}
-		if (a == colorToyButtons.length) return true;
-		return false;
+		const booleanValue = this.getFilterValue(elementColor, regexp, colorToyButtons, obj);
+		return booleanValue;
 	}
 
 	filterSizeToy(elementSize: Element) {
@@ -350,18 +330,24 @@ export class Module {
 			little: 'малый',
 		};
 		const regexp = /большой|средний|малый/gi;
-		const elementInfo = elementSize.textContent?.match(regexp)?.join('') as string;
+
+		const booleanValue = this.getFilterValue(elementSize, regexp, sizeToyButtons, obj);
+		return booleanValue;
+	}
+
+	getFilterValue(element: Element, regexp: RegExp, buttons: NodeListOf<Element>, obj: TObjFilterButton) {
+		const elementInfo = element.textContent?.match(regexp)?.join('') as string;
 		let a = 0;
 
-		for (let i = 0; i < sizeToyButtons.length; i++) {
-			const button = sizeToyButtons[i];
+		for (let i = 0; i < buttons.length; i++) {
+			const button = buttons[i];
 			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
 				return true;
 			} else if (!button.classList.contains('active')) {
 				a++ as number;
 			}
 		}
-		if (a == sizeToyButtons.length) return true;
+		if (a === buttons.length) return true;
 		return false;
 	}
 }
