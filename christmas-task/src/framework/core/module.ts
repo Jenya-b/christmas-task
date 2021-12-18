@@ -137,9 +137,7 @@ export class Module {
 				if (outputValue) {
 					input0.textContent = parseInt(outputValue[0]).toString();
 					input1.textContent = parseInt(outputValue[1]).toString();
-					const arr = [input0.textContent, input1.textContent];
-					const countList = document.querySelectorAll('.toy__item-count');
-					this.sortByNumber(arr, countList);
+					this.filterToys();
 				}
 			});
 		}
@@ -166,33 +164,44 @@ export class Module {
 				if (outputValue) {
 					input0.textContent = parseInt(outputValue[0]).toString();
 					input1.textContent = parseInt(outputValue[1]).toString();
+					this.filterToys();
 				}
 			});
 		}
 	}
 
-	sortByNumber(arr: string[], countList: NodeListOf<Element>) {
-		const leftBorder = Number(arr[0]);
-		const rightBorder = Number(arr[1]);
+	filterToys() {
+		const toys = document.querySelectorAll('.toy');
+		const countList = document.querySelectorAll('.toy__item-count');
+		const countLeftBorder = document.querySelector('#count-range-0') as HTMLElement;
+		const countRightBorder = document.querySelector('#count-range-1') as HTMLElement;
+		const arrCountBorder = [countLeftBorder.textContent as string, countRightBorder.textContent as string];
+		const yearList = document.querySelectorAll('.toy__item-year');
+		const yearLeftBorder = document.querySelector('#year-range-0') as HTMLElement;
+		const yearRightBorder = document.querySelector('#year-range-1') as HTMLElement;
+		const arrYearBorder = [yearLeftBorder.textContent as string, yearRightBorder.textContent as string];
 
-		for (let i = 0; i < countList.length; i++) {
-			const element = countList[i] as HTMLElement;
-			const parentElementClass = 'toy';
-			const parentElement = this.findAncestor(element, parentElementClass);
-			const number = Number(element.textContent?.replace(/\D/gi, ''));
+		for (let i = 0; i < toys.length; i++) {
+			const sortByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
+			const sortByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
+			const toy = toys[i];
 
-			if (number < leftBorder || number > rightBorder) {
-				parentElement.classList.add('hide');
+			if (sortByCountToys || sortByYearToys) {
+				toy.classList.add('hide');
 			} else {
-				parentElement.classList.remove('hide');
+				toy.classList.remove('hide');
 			}
 		}
 	}
 
-	findAncestor(el: HTMLElement, cls: string) {
-		while (!el.classList.contains(cls)) {
-			el = el.parentElement as HTMLElement;
+	filterToysByNumber(arr: string[], element: Element) {
+		const leftBorder = Number(arr[0]);
+		const rightBorder = Number(arr[1]);
+		const number = Number(element.textContent?.replace(/\D/gi, ''));
+
+		if (number < leftBorder || number > rightBorder) {
+			return true;
 		}
-		return el;
+		return false;
 	}
 }
