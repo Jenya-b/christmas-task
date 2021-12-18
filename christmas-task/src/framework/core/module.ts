@@ -151,7 +151,7 @@ export class Module {
 
 	setInfoForButtons() {
 		const formButtonsWrapper = document.querySelector('.form-toys__wrapper') as HTMLElement;
-		const formArr = ['ball', 'bell', 'cone', 'snowflake', 'toy'];
+		const formArr = ['ball', 'bell', 'cone', 'toy', 'snowflake'];
 		const formClassName = 'form-toys';
 		this.createFilterButtonsForm(formButtonsWrapper, formArr, formClassName);
 
@@ -254,9 +254,10 @@ export class Module {
 			const filterByFavorite = this.filterByFavoriteToys(favoriteToys[i]);
 			const filterShape = this.filterShapeToy(shapeToys[i]);
 			const filterColor = this.filterColorToy(colorToys[i]);
+			const filterSize = this.filterSizeToy(sizeToys[i]);
 			const toy = toys[i];
 
-			if (filterByCountToys || filterByYearToys || filterByFavorite || !filterShape || !filterColor) {
+			if (filterByCountToys || filterByYearToys || filterByFavorite || !filterShape || !filterColor || !filterSize) {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
@@ -338,6 +339,29 @@ export class Module {
 			}
 		}
 		if (a == colorToyButtons.length) return true;
+		return false;
+	}
+
+	filterSizeToy(elementSize: Element) {
+		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
+		const obj: TObjFilterButton = {
+			big: 'большой',
+			average: 'средний',
+			little: 'малый',
+		};
+		const regexp = /большой|средний|малый/gi;
+		const elementInfo = elementSize.textContent?.match(regexp)?.join('') as string;
+		let a = 0;
+
+		for (let i = 0; i < sizeToyButtons.length; i++) {
+			const button = sizeToyButtons[i];
+			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
+				return true;
+			} else if (!button.classList.contains('active')) {
+				a++ as number;
+			}
+		}
+		if (a == sizeToyButtons.length) return true;
 		return false;
 	}
 }
