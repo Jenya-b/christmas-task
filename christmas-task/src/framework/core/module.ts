@@ -226,12 +226,12 @@ export class Module {
 		const favoriteToys = document.querySelectorAll('.toy__item-favorite');
 
 		for (let i = 0; i < toys.length; i++) {
-			const sortByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
-			const sortByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
+			const filterByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
+			const filterByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
 			const filterByFavorite = this.filterByFavoriteToys(favoriteToys[i]);
 			const toy = toys[i];
 
-			if (sortByCountToys || sortByYearToys || filterByFavorite) {
+			if (filterByCountToys || filterByYearToys || filterByFavorite) {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
