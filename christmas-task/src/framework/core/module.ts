@@ -20,6 +20,9 @@ export type RouteType = {
 	component: IComponent;
 }[];
 export type ObjectRenderType = [object, object];
+type TObjFilterButton = {
+	[key: string]: string;
+};
 export class Module {
 	components: ObjectRenderType;
 	bootstrapComponent: object;
@@ -241,14 +244,18 @@ export class Module {
 		const yearRightBorder = document.querySelector('#year-range-1') as HTMLElement;
 		const arrYearBorder = [yearLeftBorder.textContent as string, yearRightBorder.textContent as string];
 		const favoriteToys = document.querySelectorAll('.toy__item-favorite');
+		const shapeToys = document.querySelectorAll('.toy__item-shape');
+		const colorToys = document.querySelectorAll('.toy__item-color');
+		const sizeToys = document.querySelectorAll('.toy__item-size');
 
 		for (let i = 0; i < toys.length; i++) {
 			const filterByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
 			const filterByYearToys = this.filterToysByNumber(arrYearBorder, yearList[i]);
 			const filterByFavorite = this.filterByFavoriteToys(favoriteToys[i]);
+			const visualFiltering = this.performVisualFiltering(shapeToys[i], colorToys[i], sizeToys[i]);
 			const toy = toys[i];
 
-			if (filterByCountToys || filterByYearToys || filterByFavorite) {
+			if (filterByCountToys || filterByYearToys || filterByFavorite || !visualFiltering) {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
@@ -280,5 +287,39 @@ export class Module {
 	addActiveStyle(e: EventTarget) {
 		const element = e as HTMLElement;
 		element.classList.toggle('active');
+		this.filterToys();
+	}
+
+	performVisualFiltering(elementShape: Element, elementColor: Element, elementSize: Element) {
+		const filterShape = this.filterShapeToy(elementShape);
+		if (filterShape) {
+			return true;
+		}
+		return false;
+	}
+
+	filterShapeToy(elementShape: Element) {
+		const formToyButtons = document.querySelectorAll('.form-toys__button');
+		const obj: TObjFilterButton = {
+			ball: 'шар',
+			bell: 'колокольчик',
+			cone: 'шишка',
+			snowflake: 'снежинка',
+			toy: 'фигурка',
+		};
+		const regexp = /шар|колокольчик|шишка|снежинка|фигурка/gi;
+		const elementInfo = elementShape.textContent?.match(regexp)?.join('') as string;
+		let a = 0;
+
+		for (let i = 0; i < formToyButtons.length; i++) {
+			const button = formToyButtons[i];
+			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
+				return true;
+			} else if (!button.classList.contains('active')) {
+				a++ as number;
+			}
+		}
+		if (a == formToyButtons.length) return true;
+		return false;
 	}
 }
