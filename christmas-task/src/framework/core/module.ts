@@ -64,6 +64,9 @@ export class Module {
 		) as HTMLElement).innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
 		this.renderComponent(route?.component);
 
+		const inputSearch = document.querySelector('.header__search') as HTMLInputElement;
+		inputSearch.focus();
+
 		if (route?.path === 'decor') {
 			this.setInfoForButtons();
 			this.addCardToysOnPage();
