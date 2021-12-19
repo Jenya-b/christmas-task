@@ -95,14 +95,7 @@ export class Module {
 		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
 
 		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
-		select.addEventListener('change', (e) => {
-			const element = e.target as HTMLInputElement;
-
-			if (element.value === SortEnum.nameFromMinToMax) this.sortAlphabetically(-1, 1);
-			else if (element.value === SortEnum.nameFromMaxToMin) this.sortAlphabetically(1, -1);
-			else if (element.value === SortEnum.yearFromMinToMax) this.sortbyYear(-1, 1);
-			else if (element.value === SortEnum.yearFromMaxToMin) this.sortbyYear(1, -1);
-		});
+		select.addEventListener('change', (e) => this.setDataForSorting(e));
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -379,6 +372,15 @@ export class Module {
 
 	resetActiveClass(el: Element) {
 		el.classList.remove('active');
+	}
+
+	setDataForSorting(e: Event) {
+		const element = e.target as HTMLInputElement;
+
+		if (element.value === SortEnum.nameFromMinToMax) this.sortAlphabetically(-1, 1);
+		else if (element.value === SortEnum.nameFromMaxToMin) this.sortAlphabetically(1, -1);
+		else if (element.value === SortEnum.yearFromMinToMax) this.sortbyYear(-1, 1);
+		else if (element.value === SortEnum.yearFromMaxToMin) this.sortbyYear(1, -1);
 	}
 
 	sortAlphabetically(x: number, y: number) {
