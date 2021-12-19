@@ -23,6 +23,13 @@ export type ObjectRenderType = [object, object];
 type TObjFilterButton = {
 	[key: string]: string;
 };
+
+enum SortEnum {
+	nameFromMinToMax = '1',
+	nameFromMaxToMin = '2',
+	yearFromMinToMax = '3',
+	yearFromMaxToMin = '4',
+}
 export class Module {
 	components: ObjectRenderType;
 	bootstrapComponent: object;
@@ -86,6 +93,14 @@ export class Module {
 
 		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
 		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
+
+		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
+		select.addEventListener('change', (e) => {
+			const element = e.target as HTMLInputElement;
+
+			if (element.value === SortEnum.nameFromMinToMax) this.sortAlphabetically(-1, 1);
+			else if (element.value === SortEnum.nameFromMaxToMin) this.sortAlphabetically(1, -1);
+		});
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -107,6 +122,7 @@ export class Module {
 		for (let i = 0; i < data.length; i++) {
 			toysWrapper.append(...this.getListContent(data[i]));
 		}
+		setTimeout(() => this.sortAlphabetically(-1, 1));
 	}
 
 	getListContent(data: IData): HTMLElement[] {
@@ -361,5 +377,27 @@ export class Module {
 
 	resetActiveClass(el: Element) {
 		el.classList.remove('active');
+	}
+
+	sortAlphabetically(x: number, y: number) {
+		const toys = document.querySelectorAll('div.gallery-toys__item');
+		const itemsArray: Element[] = [];
+		const parent = toys[0].parentNode as ParentNode;
+
+		for (let i = 0; i < toys.length; i++) {
+			itemsArray.push((parent as Element).removeChild(toys[i]));
+		}
+
+		itemsArray
+			.sort((a: Element, b: Element): number => {
+				const textA = (a.querySelector('h3.toy__name') as Element).textContent as string;
+				const textB = (b.querySelector('h3.toy__name') as Element).textContent as string;
+				if (textA < textB) return x;
+				if (textA > textB) return y;
+				return 0;
+			})
+			.forEach((node) => {
+				parent.appendChild(node);
+			});
 	}
 }

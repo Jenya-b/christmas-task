@@ -57,10 +57,10 @@ export const appChristmasDecoration = new AppChristmasDecoration({
 				<article class="decoration__content content-decor">
 					<h1 class="content-decor__title">Бабушкины украшения</h1>
 					<select class="content-decor__select">
-						<option>По названию от «А» до «Я»</option>
-						<option>По названию от «Я» до «А»</option>
-						<option>По количеству по возрастанию</option>
-						<option>По количеству по убыванию</option>
+						<option value="1">По названию от «А» до «Я»</option>
+						<option value="2">По названию от «Я» до «А»</option>
+						<option value="3">По количеству по возрастанию</option>
+						<option value="4">По количеству по убыванию</option>
 					</select>
 					<section class="content-decor__gallery gallery-toys">
 						<h2 class="gallery-toys__title">Игрушки</h2>
