@@ -26,7 +26,7 @@ export const appHeader = new AppHeader({
 			</div>
 			<div class="header__wrapper">
 				<input type="search" class="header__search" />
-				<div class="header__counter"><span>12</span></div>
+				<div class="header__counter"><span>0</span></div>
 			</div>
 		</div>
 	`,

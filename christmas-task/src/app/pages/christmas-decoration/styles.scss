@@ -249,6 +249,9 @@ input::-webkit-inner-spin-button {
 	&.hide {
 		display: none;
 	}
+	&.active {
+		background: #463e14;
+	}
 
 	padding: 30px 20px;
 	display: grid;

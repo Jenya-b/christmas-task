@@ -93,6 +93,7 @@ export class Module {
 			toysWrapper.append(...this.getListContent(data[i]));
 		}
 		setTimeout(() => this.sortAlphabetically(-1, 1));
+		setTimeout(this.addToysToFavorites, 100);
 	}
 
 	getListContent(data: IData): HTMLElement[] {
@@ -426,5 +427,25 @@ export class Module {
 			.forEach((node) => {
 				parent.appendChild(node);
 			});
+	}
+
+	addToysToFavorites() {
+		const toyList = document.querySelectorAll('.gallery-toys__item');
+		const headerCounter = document.querySelector('.header__counter')?.querySelector('span');
+		let count = 0;
+
+		toyList.forEach((el) => {
+			el.addEventListener('click', (e) => {
+				const element = e.currentTarget as HTMLElement;
+				if (!element.classList.contains('active') && count < 20) {
+					element.classList.add('active');
+					count++ as number;
+				} else if (element.classList.contains('active')) {
+					element.classList.remove('active');
+					count-- as number;
+				}
+				(headerCounter as HTMLElement).innerText = String(count);
+			});
+		});
 	}
 }
