@@ -94,6 +94,7 @@ export class Module {
 		}
 		setTimeout(() => this.sortAlphabetically(-1, 1));
 		setTimeout(this.addToysToFavorites, 100);
+		setTimeout(this.findOnTheCardPage, 100);
 	}
 
 	getListContent(data: IData): HTMLElement[] {
@@ -446,6 +447,38 @@ export class Module {
 				}
 				(headerCounter as HTMLElement).innerText = String(count);
 			});
+		});
+	}
+
+	findOnTheCardPage() {
+		const toys = document.querySelectorAll('div.gallery-toys__item');
+		const nameToys = document.querySelectorAll('h3.toy__name');
+		const inputSearch = document.querySelector('.header__search') as HTMLElement;
+		const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
+
+		inputSearch.addEventListener('keyup', (e) => {
+			const element = e.target as HTMLInputElement;
+			const value = element.value.toUpperCase() as string;
+			const regexp = new RegExp(value);
+			let count = 0;
+
+			for (let i = 0; i < nameToys.length; i++) {
+				const element = nameToys[i];
+				const elementText = element.textContent?.toUpperCase() as string;
+
+				if (elementText.match(regexp)?.input) {
+					toys[i].classList.remove('hide-search');
+					count++ as number;
+				} else {
+					toys[i].classList.add('hide-search');
+				}
+			}
+
+			if (!count) {
+				infoText.classList.add('hide');
+			} else {
+				infoText.classList.remove('hide');
+			}
 		});
 	}
 }

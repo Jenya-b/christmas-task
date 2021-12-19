@@ -25,7 +25,7 @@ export const appHeader = new AppHeader({
 				</nav>
 			</div>
 			<div class="header__wrapper">
-				<input type="search" class="header__search" />
+				<input type="search" class="header__search" placeholder="Поиск" autocomplete="off" />
 				<div class="header__counter"><span>0</span></div>
 			</div>
 		</div>

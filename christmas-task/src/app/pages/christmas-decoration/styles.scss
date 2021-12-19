@@ -244,6 +244,16 @@ input::-webkit-inner-spin-button {
 
 	&__item {
 	}
+
+	&__error-search {
+		display: none;
+	}
+
+	&__error-search.hide {
+		font-size: 1.3rem;
+		color: red;
+		display: block;
+	}
 }
 .toy {
 	&.hide {
@@ -251,6 +261,9 @@ input::-webkit-inner-spin-button {
 	}
 	&.active {
 		background: #463e14;
+	}
+	&.hide-search {
+		display: none;
 	}
 
 	padding: 30px 20px;

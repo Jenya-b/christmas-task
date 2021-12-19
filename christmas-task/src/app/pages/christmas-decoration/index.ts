@@ -65,7 +65,7 @@ export const appChristmasDecoration = new AppChristmasDecoration({
 					<section class="content-decor__gallery gallery-toys">
 						<h2 class="gallery-toys__title">Игрушки</h2>
 						<div class="gallery-toys__items">
-							
+							<div class="gallery-toys__error-search">Поиск результатов не дал (((</div>
 						</div>
 					</section>
 				</article>
