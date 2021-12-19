@@ -436,18 +436,25 @@ export class Module {
 	addToysToFavorites() {
 		const toyList = document.querySelectorAll('.gallery-toys__item');
 		const headerCounter = document.querySelector('.header__counter')?.querySelector('span');
+		const popUpWarning = document.querySelector('.pop-up-warning') as HTMLElement;
 		let count = 0;
 
 		toyList.forEach((el) => {
 			el.addEventListener('click', (e) => {
 				const element = e.currentTarget as HTMLElement;
-				if (!element.classList.contains('active') && count < 20) {
+				const maxValue = 20;
+
+				if (!element.classList.contains('active') && count < maxValue) {
 					element.classList.add('active');
 					count++ as number;
 				} else if (element.classList.contains('active')) {
 					element.classList.remove('active');
 					count-- as number;
+				} else if (count === maxValue) {
+					popUpWarning.classList.add('active');
+					setTimeout(() => popUpWarning.classList.remove('active'), 2000);
 				}
+
 				(headerCounter as HTMLElement).innerText = String(count);
 			});
 		});

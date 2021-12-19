@@ -12,6 +12,7 @@ export const appComponent = new AppComponent({
 	template: `
 		<header class="header"></header>
 		<dinamic-page></dinamic-page>
+		<div class="pop-up-warning">Извините, все слоты заполнены</div>
 		<footer class="footer"></footer>
 	`,
 });
