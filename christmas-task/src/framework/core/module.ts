@@ -69,33 +69,8 @@ export class Module {
 			this.addCardToysOnPage();
 			this.setRangeOfInstances();
 			this.setRangeOfYears();
+			this.addEventsForToys();
 		}
-
-		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
-		inputCheckbox.addEventListener('change', () => {
-			this.filterToys();
-		});
-
-		const formToyButtons = document.querySelectorAll('.form-toys__button');
-		formToyButtons.forEach((el) => {
-			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
-		});
-
-		const colorToyButtons = document.querySelectorAll('.color-toys__button');
-		colorToyButtons.forEach((el) => {
-			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
-		});
-
-		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
-		sizeToyButtons.forEach((el) => {
-			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
-		});
-
-		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
-		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
-
-		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
-		select.addEventListener('change', (e) => this.setDataForSorting(e));
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -161,6 +136,32 @@ export class Module {
 		result.push(toy);
 
 		return result;
+	}
+
+	addEventsForToys() {
+		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+		inputCheckbox.addEventListener('change', this.filterToys.bind(this));
+
+		const formToyButtons = document.querySelectorAll('.form-toys__button');
+		formToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
+
+		const colorToyButtons = document.querySelectorAll('.color-toys__button');
+		colorToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
+
+		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
+		sizeToyButtons.forEach((el) => {
+			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
+		});
+
+		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
+		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
+
+		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
+		select.addEventListener('change', (e) => this.setDataForSorting(e));
 	}
 
 	setInfoForButtons() {
