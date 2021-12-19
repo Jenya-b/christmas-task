@@ -451,12 +451,14 @@ export class Module {
 	}
 
 	findOnTheCardPage() {
-		const toys = document.querySelectorAll('div.gallery-toys__item');
-		const nameToys = document.querySelectorAll('h3.toy__name');
 		const inputSearch = document.querySelector('.header__search') as HTMLElement;
-		const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
+		inputSearch.addEventListener('keyup', setTheDisplayOfCards);
+		inputSearch.addEventListener('search', setTheDisplayOfCards);
 
-		inputSearch.addEventListener('keyup', (e) => {
+		function setTheDisplayOfCards(e: KeyboardEvent | Event) {
+			const toys = document.querySelectorAll('div.gallery-toys__item');
+			const nameToys = document.querySelectorAll('h3.toy__name');
+
 			const element = e.target as HTMLInputElement;
 			const value = element.value.toUpperCase() as string;
 			const regexp = new RegExp(value);
@@ -474,11 +476,17 @@ export class Module {
 				}
 			}
 
+			displayWarning(count);
+		}
+
+		function displayWarning(count: number) {
+			const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
+
 			if (!count) {
 				infoText.classList.add('hide');
 			} else {
 				infoText.classList.remove('hide');
 			}
-		});
+		}
 	}
 }
