@@ -60,8 +60,8 @@ export class Module {
 		if (route?.path === 'decor') {
 			this.setInfoForButtons();
 			this.addCardToysOnPage();
-			this.setRangeOfInstances(1, 12);
-			this.setRangeOfYears(1940, 2021);
+			this.setRangeOfInstances();
+			this.setRangeOfYears();
 		}
 
 		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
@@ -182,39 +182,25 @@ export class Module {
 		parentElement.append(...result);
 	}
 
-	setRangeOfInstances(min: number, max: number) {
+	setRangeOfInstances() {
 		const rangeSlider = document.querySelector('#count-toys-slider') as target;
-		if (rangeSlider) {
-			noUiSlider.create(rangeSlider, {
-				start: [min, max],
-				connect: true,
-				step: 1,
-				range: {
-					min: [min],
-					max: [max],
-				},
-			});
-
-			const input0 = document.querySelector('#count-range-0') as HTMLElement;
-			const input1 = document.querySelector('#count-range-1') as HTMLElement;
-
-			(<API>rangeSlider.noUiSlider).on('update', () => {
-				const outputValue = rangeSlider.noUiSlider.get() as string[];
-				if (outputValue) {
-					input0.textContent = parseInt(outputValue[0]).toString();
-					input1.textContent = parseInt(outputValue[1]).toString();
-					this.filterToys();
-				}
-			});
-			const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
-			buttonSettingsReset.addEventListener('click', () => {
-				rangeSlider.noUiSlider.reset();
-			});
-		}
+		const input0 = document.querySelector('#count-range-0') as HTMLElement;
+		const input1 = document.querySelector('#count-range-1') as HTMLElement;
+		const min = 1;
+		const max = 12;
+		this.setRange(rangeSlider, input0, input1, min, max);
 	}
 
-	setRangeOfYears(min: number, max: number) {
+	setRangeOfYears() {
 		const rangeSlider = document.querySelector('#year-toys-slider') as target;
+		const input0 = document.querySelector('#year-range-0') as HTMLElement;
+		const input1 = document.querySelector('#year-range-1') as HTMLElement;
+		const min = 1940;
+		const max = 2021;
+		this.setRange(rangeSlider, input0, input1, min, max);
+	}
+
+	setRange(rangeSlider: target, input0: HTMLElement, input1: HTMLElement, min: number, max: number) {
 		if (rangeSlider) {
 			noUiSlider.create(rangeSlider, {
 				start: [min, max],
@@ -225,9 +211,6 @@ export class Module {
 					max: [max],
 				},
 			});
-
-			const input0 = document.querySelector('#year-range-0') as HTMLElement;
-			const input1 = document.querySelector('#year-range-1') as HTMLElement;
 
 			(<API>rangeSlider.noUiSlider).on('update', () => {
 				const outputValue = rangeSlider.noUiSlider.get() as string[];
