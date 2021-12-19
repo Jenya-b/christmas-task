@@ -100,6 +100,8 @@ export class Module {
 
 			if (element.value === SortEnum.nameFromMinToMax) this.sortAlphabetically(-1, 1);
 			else if (element.value === SortEnum.nameFromMaxToMin) this.sortAlphabetically(1, -1);
+			else if (element.value === SortEnum.yearFromMinToMax) this.sortbyYear(-1, 1);
+			else if (element.value === SortEnum.yearFromMaxToMin) this.sortbyYear(1, -1);
 		});
 	}
 
@@ -392,6 +394,28 @@ export class Module {
 			.sort((a: Element, b: Element): number => {
 				const textA = (a.querySelector('h3.toy__name') as Element).textContent as string;
 				const textB = (b.querySelector('h3.toy__name') as Element).textContent as string;
+				if (textA < textB) return x;
+				if (textA > textB) return y;
+				return 0;
+			})
+			.forEach((node) => {
+				parent.appendChild(node);
+			});
+	}
+
+	sortbyYear(x: number, y: number) {
+		const toys = document.querySelectorAll('div.gallery-toys__item');
+		const itemsArray: Element[] = [];
+		const parent = toys[0].parentNode as ParentNode;
+
+		for (let i = 0; i < toys.length; i++) {
+			itemsArray.push((parent as Element).removeChild(toys[i]));
+		}
+
+		itemsArray
+			.sort((a: Element, b: Element): number => {
+				const textA = (a.querySelector('li.toy__item-year') as Element).textContent?.replace(/\D/gi, '') as string;
+				const textB = (b.querySelector('li.toy__item-year') as Element).textContent?.replace(/\D/gi, '') as string;
 				if (textA < textB) return x;
 				if (textA > textB) return y;
 				return 0;
