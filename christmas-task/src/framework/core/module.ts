@@ -258,6 +258,7 @@ export class Module {
 		const shapeToys = document.querySelectorAll('.toy__item-shape');
 		const colorToys = document.querySelectorAll('.toy__item-color');
 		const sizeToys = document.querySelectorAll('.toy__item-size');
+		let count = 0;
 
 		for (let i = 0; i < toys.length; i++) {
 			const filterByCountToys = this.filterToysByNumber(arrCountBorder, countList[i]);
@@ -272,8 +273,11 @@ export class Module {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
+				count++ as number;
 			}
 		}
+
+		displayWarning(count);
 	}
 
 	filterToysByNumber(arr: string[], element: Element) {
@@ -488,15 +492,15 @@ export class Module {
 
 			displayWarning(count);
 		}
+	}
+}
 
-		function displayWarning(count: number) {
-			const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
+function displayWarning(count: number) {
+	const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
 
-			if (!count) {
-				infoText.classList.add('hide');
-			} else {
-				infoText.classList.remove('hide');
-			}
-		}
+	if (!count) {
+		infoText.classList.add('hide');
+	} else {
+		infoText.classList.remove('hide');
 	}
 }
