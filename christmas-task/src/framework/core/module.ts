@@ -78,6 +78,7 @@ export class Module {
 		if (route?.path === 'tree') {
 			this.addTreesOnPage();
 			this.addBackgroundImageOptions();
+			this.addToysFromFavorites();
 		}
 	}
 
@@ -86,15 +87,15 @@ export class Module {
 		c.render();
 	}
 
-	async getInfo(url: string) {
+	async getInfo() {
+		const url = 'https://jenya-b.github.io/json/data.json';
 		const responce = await fetch(url);
 		const data = await responce.json();
 		return data as IData[];
 	}
 
 	async addCardToysOnPage() {
-		const url = 'https://jenya-b.github.io/json/data.json';
-		const data = await this.getInfo(url);
+		const data = await this.getInfo();
 		const toysWrapper = document.querySelector('.gallery-toys__items') as HTMLElement;
 
 		for (let i = 0; i < data.length; i++) {
@@ -535,6 +536,29 @@ export class Module {
 		}
 
 		backgroundImagesWrapper?.append(...backgroundImagesArray);
+	}
+
+	async addToysFromFavorites() {
+		const data = await this.getInfo();
+		const wrapper = document.querySelector('.prepared-decorations__toys-wrapper');
+		const arr: HTMLElement[] = [];
+		const url = 'https://jenya-b.github.io/json/toys';
+		const count = 20;
+
+		for (let i = 1; i <= count; i++) {
+			const item = document.createElement('div');
+			item.classList.add('prepared-decorations__toys-item');
+			item.id = `toys-item-${i}`;
+			const num = document.createElement('div');
+			num.classList.add('prepared-decorations__toys-item-count');
+			num.innerText = `${data[i].count}`;
+			const img = document.createElement('img');
+			img.src = `${url}/${i}.png`;
+			item.append(img, num);
+			arr.push(item);
+		}
+
+		wrapper?.append(...arr);
 	}
 }
 

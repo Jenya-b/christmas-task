@@ -38,38 +38,7 @@ export const appChristmasTrees = new AppChristmasTrees({
 					<div class="prepared-decorations__toys">
 						<div class="prepared-decorations__title">Игрушки</div>
 						<div class="prepared-decorations__toys-wrapper">
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
-							<div class="prepared-decorations__background-item">
-								<img src="https://jenya-b.github.io/json/toys/1.png">
-								<div class="prepared-decorations__background-item-count">12</div>
-							</div>
+							
 						</div>
 					</div>
 					<div class="prepared-decorations__trees">
