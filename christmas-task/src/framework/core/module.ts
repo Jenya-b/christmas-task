@@ -277,7 +277,7 @@ export class Module {
 			}
 		}
 
-		displayWarning(count);
+		if (toys.length) displayWarning(count);
 	}
 
 	filterToysByNumber(arr: string[], element: Element) {
