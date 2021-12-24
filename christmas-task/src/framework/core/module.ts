@@ -77,6 +77,7 @@ export class Module {
 
 		if (route?.path === 'tree') {
 			this.addTreesOnPage();
+			this.addBackgroundImageOptions();
 		}
 	}
 
@@ -507,7 +508,7 @@ export class Module {
 		for (let i = 1; i <= countTrees; i++) {
 			const treesItem = document.createElement('div');
 			treesItem.classList.add('settings-game__trees-item');
-			treesItem.id = 'trees-item-1';
+			treesItem.id = `trees-item-${i}`;
 			const img = document.createElement('img');
 			img.src = `${url}/${i}.png`;
 			treesItem.append(img);
@@ -515,6 +516,25 @@ export class Module {
 		}
 
 		treesWrapper?.append(...treeArray);
+	}
+
+	addBackgroundImageOptions() {
+		const backgroundImagesWrapper = document.querySelector('.settings-game__background-wrapper');
+		const backgroundImagesArray: HTMLElement[] = [];
+		const url = 'https://jenya-b.github.io/json/bg';
+		const countBackgroundImages = 10;
+
+		for (let i = 1; i <= countBackgroundImages; i++) {
+			const backgroundItem = document.createElement('div');
+			backgroundItem.classList.add('settings-game__background-item');
+			backgroundItem.id = `background-item-${i}`;
+			const img = document.createElement('img');
+			img.src = `${url}/${i}.jpg`;
+			backgroundItem.append(img);
+			backgroundImagesArray.push(backgroundItem);
+		}
+
+		backgroundImagesWrapper?.append(...backgroundImagesArray);
 	}
 }
 

@@ -25,36 +25,7 @@ export const appChristmasTrees = new AppChristmasTrees({
 					<div class="settings-game__background">
 						<div class="settings-game__title">Выберите фон</div>
 						<div class="settings-game__background-wrapper">
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/1.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/2.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/3.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/4.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/5.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/6.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/7.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/8.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/9.jpg">
-							</div>
-							<div class="settings-game__background-item">
-								<img src="https://jenya-b.github.io/json/bg/10.jpg">
-							</div>
+							
 						</div>
 					</div>
 					<div class="settings-game__garland">
