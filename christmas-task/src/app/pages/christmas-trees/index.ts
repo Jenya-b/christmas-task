@@ -19,24 +19,7 @@ export const appChristmasTrees = new AppChristmasTrees({
 					<div class="settings-game__trees">
 						<div class="settings-game__title">Выберите ёлку</div>
 						<div class="settings-game__trees-wrapper">
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/1.png">
-							</div>
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/2.png">
-							</div>
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/3.png">
-							</div>
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/4.png">
-							</div>
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/4.png">
-							</div>
-							<div class="settings-game__trees-item">
-								<img src="https://jenya-b.github.io/json/tree/4.png">
-							</div>
+							
 						</div>
 					</div>
 					<div class="settings-game__background">

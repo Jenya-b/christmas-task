@@ -74,6 +74,10 @@ export class Module {
 			this.setRangeOfYears();
 			this.addEventsForToys();
 		}
+
+		if (route?.path === 'tree') {
+			this.addTreesOnPage();
+		}
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
@@ -492,6 +496,25 @@ export class Module {
 
 			displayWarning(count);
 		}
+	}
+
+	addTreesOnPage() {
+		const treesWrapper = document.querySelector('.settings-game__trees-wrapper');
+		const treeArray: HTMLElement[] = [];
+		const url = 'https://jenya-b.github.io/json/tree';
+		const countTrees = 6;
+
+		for (let i = 1; i <= countTrees; i++) {
+			const treesItem = document.createElement('div');
+			treesItem.classList.add('settings-game__trees-item');
+			treesItem.id = 'trees-item-1';
+			const img = document.createElement('img');
+			img.src = `${url}/${i}.png`;
+			treesItem.append(img);
+			treeArray.push(treesItem);
+		}
+
+		treesWrapper?.append(...treeArray);
 	}
 }
 
