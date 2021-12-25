@@ -20,14 +20,21 @@
 		padding: 10px 20px;
 	}
 
+	&__tree.snow {
+		background-image: url('./assets/snow/snow.png'), url('./assets/snow/snow3.png'), url('./assets/snow/snow2.png');
+		animation: snow 20s linear infinite;
+	}
+
 	&__tree {
 		display: flex;
 		justify-content: center;
+		z-index: 10;
 	}
 
 	&__tree img {
 		max-width: 500px;
 		max-height: 700px;
+		z-index: 5;
 	}
 
 	&__prepared-decorations {
@@ -48,14 +55,18 @@
 	&__snow {
 		width: 35px;
 		height: 35px;
-		background-image: url('./assets/svg/audio.svg');
+		background-image: url('./assets/svg/snow.svg');
 		background-size: contain;
+	}
+
+	&__snow.active {
+		filter: invert(27%) sepia(15%) saturate(5120%) hue-rotate(161deg) brightness(89%) contrast(88%);
 	}
 
 	&__audio {
 		width: 35px;
 		height: 35px;
-		background-image: url('./assets/svg/snow.svg');
+		background-image: url('./assets/svg/audio.svg');
 		background-size: contain;
 	}
 
@@ -175,5 +186,45 @@
 	}
 
 	&__trees-wrapper {
+	}
+}
+
+@keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px;
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
+	}
+}
+
+@-moz-keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px;
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
+	}
+}
+
+@-webkit-keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px;
+	}
+	50% {
+		background-color: #b4cfe0;
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
+		background-color: #6b92b9;
+	}
+}
+
+@-ms-keyframes snow {
+	0% {
+		background-position: 0px 0px, 0px 0px, 0px 0px;
+	}
+	100% {
+		background-position: 500px 1000px, 400px 400px, 300px 300px;
 	}
 }

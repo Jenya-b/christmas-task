@@ -13,8 +13,8 @@ export const appChristmasTrees = new AppChristmasTrees({
 			<main class="christmas-game">
 				<div class="christmas-game__settings settings-game">
 					<div class="settings-game__snow-audio-container">
-						<div class="settings-game__snow"></div>
 						<div class="settings-game__audio"></div>
+						<div class="settings-game__snow"></div>
 					</div>
 					<div class="settings-game__trees">
 						<div class="settings-game__title">Выберите ёлку</div>

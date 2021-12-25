@@ -186,6 +186,9 @@ export class Module {
 		bgImageList.forEach((el) => {
 			el.addEventListener('click', (e) => this.chooseBackgroundPicture(e));
 		});
+
+		const snowBtn = document.querySelector('.settings-game__snow');
+		snowBtn?.addEventListener('click', (e) => this.addSnow(e));
 	}
 
 	chooseTreeForDecoration(e: Event) {
@@ -204,6 +207,18 @@ export class Module {
 		const url = 'https://jenya-b.github.io/json/bg';
 
 		bg.style.backgroundImage = `url(${url}/${num}.jpg)`;
+	}
+
+	addSnow(e: Event) {
+		const btn = e.target as HTMLElement;
+		const block = document.querySelector('.christmas-game__tree');
+		if (block?.classList.contains('snow')) {
+			btn.classList.remove('active');
+			block.classList.remove('snow');
+		} else {
+			btn.classList.add('active');
+			block?.classList.add('snow');
+		}
 	}
 
 	setInfoForButtons() {
