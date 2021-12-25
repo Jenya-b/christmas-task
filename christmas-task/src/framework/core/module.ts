@@ -181,6 +181,11 @@ export class Module {
 		treeList.forEach((el) => {
 			el.addEventListener('click', (e) => this.chooseTreeForDecoration(e));
 		});
+
+		const bgImageList = document.querySelectorAll('.settings-game__background-item');
+		bgImageList.forEach((el) => {
+			el.addEventListener('click', (e) => this.chooseBackgroundPicture(e));
+		});
 	}
 
 	chooseTreeForDecoration(e: Event) {
@@ -190,6 +195,15 @@ export class Module {
 		const url = 'https://jenya-b.github.io/json/tree';
 
 		img.src = `${url}/${num}.png`;
+	}
+
+	chooseBackgroundPicture(e: Event) {
+		const element = e.currentTarget as HTMLElement;
+		const num = element.id.replace(/\D/gi, '');
+		const bg = document.querySelector('.christmas-game__place-tree') as HTMLImageElement;
+		const url = 'https://jenya-b.github.io/json/bg';
+
+		bg.style.backgroundImage = `url(${url}/${num}.jpg)`;
 	}
 
 	setInfoForButtons() {

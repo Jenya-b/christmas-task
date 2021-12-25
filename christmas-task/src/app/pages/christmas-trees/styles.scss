@@ -3,21 +3,21 @@
 	display: grid;
 	grid-template: 1fr / 1fr minmax(auto, 480px) minmax(300px, 660px) minmax(auto, 480px) 1fr;
 	color: $text-color-light;
+	background-color: rgba(31, 112, 127, 0.3);
+	backdrop-filter: blur(6px);
 
 	&__settings {
 		padding: 40px 20px;
 		grid-column: 2/3;
-		background-color: rgba(31, 112, 127, 0.3);
-		backdrop-filter: blur(6px);
 	}
 
 	&__place-tree {
 		grid-column: 3/4;
-		background: url('./assets/bg/1.jpg');
+		background-image: url('./assets/bg/1.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
-		padding: 50px 60px;
+		padding: 10px 20px;
 	}
 
 	&__tree {
@@ -27,14 +27,12 @@
 
 	&__tree img {
 		max-width: 500px;
-		max-height: 600px;
+		max-height: 700px;
 	}
 
 	&__prepared-decorations {
 		padding: 40px 20px;
 		grid-column: 4/5;
-		background-color: rgba(31, 112, 127, 0.3);
-		backdrop-filter: blur(6px);
 	}
 }
 .settings-game {
