@@ -34,6 +34,9 @@ export const appChristmasTrees = new AppChristmasTrees({
 					</div>
 				</div>
 				<div class="christmas-game__place-tree">
+					<div class="christmas-game__garland-wrapper">
+						
+					</div>
 					<div class="christmas-game__tree">
 						<img src="https://jenya-b.github.io/json/tree/2.png">
 					</div>

@@ -195,6 +195,8 @@ export class Module {
 
 		const audioBtn = document.querySelector('.settings-game__audio');
 		audioBtn?.addEventListener('click', (e) => this.addAudio(e));
+
+		this.addGarlands();
 	}
 
 	chooseTreeForDecoration(e: Event) {
@@ -238,6 +240,32 @@ export class Module {
 			btn.classList.remove('active');
 			audio.pause();
 		}
+	}
+
+	addGarlands() {
+		const garlandWrapper = document.querySelector('.christmas-game__garland-wrapper');
+		const arrResult: HTMLElement[] = [];
+		const numberLine = 8;
+		const num = 4;
+		let count = 5;
+
+		for (let i = 0; i < numberLine; i++) {
+			const arrLi: HTMLElement[] = [];
+			const ul = document.createElement('ul');
+			ul.classList.add('christmas-game__lightrope');
+
+			for (let j = 0; j < count; j++) {
+				const li = document.createElement('li');
+				li.style.transform = `rotate(85deg) translate(${j}px) rotate(-5deg)`;
+				arrLi.push(li);
+			}
+
+			ul.append(...arrLi);
+			arrResult.push(ul);
+			count += num;
+		}
+
+		garlandWrapper?.append(...arrResult);
 	}
 
 	setInfoForButtons() {
