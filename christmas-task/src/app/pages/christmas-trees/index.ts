@@ -36,6 +36,10 @@ export const appChristmasTrees = new AppChristmasTrees({
 							<button class="settings-game__garland-item" id="magenta"></button>
 							<button class="settings-game__garland-item" id="orange"></button>
 							<button class="settings-game__garland-item" id="multicolored"></button>
+							<div class="settings-game__checkbox">  
+      					<input type="checkbox" value="None" id="checkbox-color" name="check"/>
+     	 					<label for="checkbox-color"></label>
+    					</div>
 						</div>
 					</div>
 				</div>

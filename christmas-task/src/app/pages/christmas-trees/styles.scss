@@ -34,6 +34,11 @@
 		align-items: center;
 		row-gap: 20px;
 		z-index: 100;
+		opacity: 1;
+	}
+
+	&__garland-wrapper.hide {
+		opacity: 0;
 	}
 
 	&__lightrope {
@@ -314,7 +319,8 @@
 
 	&__garland-wrapper {
 		display: flex;
-		column-gap: 20px;
+		align-items: center;
+		column-gap: 25px;
 	}
 
 	&__garland-item {
@@ -338,6 +344,54 @@
 	}
 	&__garland-item:nth-child(5) {
 		background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
+	}
+
+	&__checkbox {
+		width: 90px;
+		height: 26px;
+		background: #333;
+		position: relative;
+		border-radius: 50px;
+		box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+		&:after {
+			content: 'ВЫКЛ';
+			color: #000;
+			position: absolute;
+			right: 5px;
+			z-index: 0;
+			font: 12px/26px Arial, sans-serif;
+			font-weight: bold;
+			text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+		}
+		&:before {
+			content: 'ВКЛ';
+			color: #c0392b;
+			position: absolute;
+			left: 10px;
+			z-index: 0;
+			font: 12px/26px Arial, sans-serif;
+			font-weight: bold;
+		}
+		label {
+			display: block;
+			width: 44px;
+			height: 20px;
+			cursor: pointer;
+			position: absolute;
+			top: 3px;
+			left: 3px;
+			z-index: 1;
+			background: #fcfff4;
+			border-radius: 50px;
+			transition: all 0.4s ease;
+			box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+		}
+		input[type='checkbox'] {
+			visibility: hidden;
+			&:checked + label {
+				left: 43px;
+			}
+		}
 	}
 }
 .prepared-decorations {

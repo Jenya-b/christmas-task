@@ -202,6 +202,15 @@ export class Module {
 		btnGarland.forEach((el) => {
 			el.addEventListener('click', (e) => this.addColorGarlands(e));
 		});
+
+		const checkboxColor = document.querySelector('#checkbox-color');
+		checkboxColor?.addEventListener('change', (e) => {
+			const garlandWrapper = document.querySelector('.christmas-game__garland-wrapper');
+			const element = e.target as HTMLInputElement;
+
+			if (element.checked) garlandWrapper?.classList.add('hide');
+			else garlandWrapper?.classList.remove('hide');
+		});
 	}
 
 	chooseTreeForDecoration(e: Event) {
