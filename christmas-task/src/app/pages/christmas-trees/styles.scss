@@ -11,12 +11,23 @@
 		backdrop-filter: blur(6px);
 	}
 
-	&__dressing-tree {
+	&__place-tree {
 		grid-column: 3/4;
 		background: url('./assets/bg/1.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
+		padding: 50px 60px;
+	}
+
+	&__tree {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__tree img {
+		max-width: 500px;
+		max-height: 600px;
 	}
 
 	&__prepared-decorations {

@@ -33,7 +33,11 @@ export const appChristmasTrees = new AppChristmasTrees({
 						<div class="settings-game__garland-wrapper"></div>
 					</div>
 				</div>
-				<div class="christmas-game__dressing-tree"></div>
+				<div class="christmas-game__place-tree">
+					<div class="christmas-game__tree">
+						<img src="https://jenya-b.github.io/json/tree/2.png">
+					</div>
+				</div>
 				<div class="christmas-game__prepared-decorations prepared-decorations">
 					<div class="prepared-decorations__toys">
 						<div class="prepared-decorations__title">Игрушки</div>

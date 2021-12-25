@@ -79,6 +79,7 @@ export class Module {
 			this.addTreesOnPage();
 			this.addBackgroundImageOptions();
 			this.addToysFromFavorites();
+			this.addEventsForTrees();
 		}
 	}
 
@@ -173,6 +174,22 @@ export class Module {
 
 		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
 		select.addEventListener('change', (e) => this.setDataForSorting(e));
+	}
+
+	addEventsForTrees() {
+		const treeList = document.querySelectorAll('.settings-game__trees-item');
+		treeList.forEach((el) => {
+			el.addEventListener('click', (e) => this.chooseTreeForDecoration(e));
+		});
+	}
+
+	chooseTreeForDecoration(e: Event) {
+		const element = e.currentTarget as HTMLElement;
+		const num = element.id.replace(/\D/gi, '');
+		const img = document.querySelector('.christmas-game__tree img') as HTMLImageElement;
+		const url = 'https://jenya-b.github.io/json/tree';
+
+		img.src = `${url}/${num}.png`;
 	}
 
 	setInfoForButtons() {
