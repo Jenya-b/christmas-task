@@ -3,6 +3,9 @@ import { IComponent } from './component';
 import noUiSlider, { API, target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
+const audio = new Audio();
+audio.src = 'https://jenya-b.github.io/json/audio/audio.mp3';
+audio.loop = true;
 interface IData {
 	num: string;
 	name: string;
@@ -189,6 +192,9 @@ export class Module {
 
 		const snowBtn = document.querySelector('.settings-game__snow');
 		snowBtn?.addEventListener('click', (e) => this.addSnow(e));
+
+		const audioBtn = document.querySelector('.settings-game__audio');
+		audioBtn?.addEventListener('click', (e) => this.addAudio(e));
 	}
 
 	chooseTreeForDecoration(e: Event) {
@@ -212,12 +218,25 @@ export class Module {
 	addSnow(e: Event) {
 		const btn = e.target as HTMLElement;
 		const block = document.querySelector('.christmas-game__tree');
+
 		if (block?.classList.contains('snow')) {
 			btn.classList.remove('active');
 			block.classList.remove('snow');
 		} else {
 			btn.classList.add('active');
 			block?.classList.add('snow');
+		}
+	}
+
+	addAudio(e: Event) {
+		const btn = e.target as HTMLElement;
+
+		if (audio.paused) {
+			btn.classList.add('active');
+			audio.play();
+		} else {
+			btn.classList.remove('active');
+			audio.pause();
 		}
 	}
 

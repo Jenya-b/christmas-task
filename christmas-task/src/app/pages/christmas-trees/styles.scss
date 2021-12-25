@@ -59,7 +59,8 @@
 		background-size: contain;
 	}
 
-	&__snow.active {
+	&__snow.active,
+	&__audio.active {
 		filter: invert(27%) sepia(15%) saturate(5120%) hue-rotate(161deg) brightness(89%) contrast(88%);
 	}
 
