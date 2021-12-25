@@ -30,7 +30,13 @@ export const appChristmasTrees = new AppChristmasTrees({
 					</div>
 					<div class="settings-game__garland">
 						<div class="settings-game__title">Гирлянда</div>
-						<div class="settings-game__garland-wrapper"></div>
+						<div class="settings-game__garland-wrapper">
+							<button class="settings-game__garland-item" id="green"></button>
+							<button class="settings-game__garland-item" id="blue"></button>
+							<button class="settings-game__garland-item" id="magenta"></button>
+							<button class="settings-game__garland-item" id="orange"></button>
+							<button class="settings-game__garland-item" id="multicolored"></button>
+						</div>
 					</div>
 				</div>
 				<div class="christmas-game__place-tree">

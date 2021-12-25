@@ -197,6 +197,11 @@ export class Module {
 		audioBtn?.addEventListener('click', (e) => this.addAudio(e));
 
 		this.addGarlands();
+
+		const btnGarland = document.querySelectorAll('.settings-game__garland-item');
+		btnGarland.forEach((el) => {
+			el.addEventListener('click', (e) => this.addColorGarlands(e));
+		});
 	}
 
 	chooseTreeForDecoration(e: Event) {
@@ -266,6 +271,22 @@ export class Module {
 		}
 
 		garlandWrapper?.append(...arrResult);
+	}
+
+	addColorGarlands(e: Event) {
+		const element = e.target as HTMLElement;
+		const garlandsList = document.querySelectorAll('.christmas-game__lightrope li');
+		let color: string;
+
+		if (element.id === 'blue') color = 'blue';
+		else if (element.id === 'magenta') color = 'magenta';
+		else if (element.id === 'orange') color = 'orange';
+		else if (element.id === 'green') color = 'green';
+		else if (element.id === 'multicolored') color = 'active';
+
+		garlandsList.forEach((el) => {
+			el.className = color;
+		});
 	}
 
 	setInfoForButtons() {

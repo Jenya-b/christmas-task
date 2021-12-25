@@ -41,9 +41,7 @@
 
 	&__lightrope li {
 		position: relative;
-		-webkit-animation-fill-mode: both;
 		animation-fill-mode: both;
-		-webkit-animation-iteration-count: infinite;
 		animation-iteration-count: infinite;
 		list-style: none;
 		margin: 0;
@@ -55,15 +53,30 @@
 		margin: 20px 3px;
 		display: inline-block;
 		background: #00f7a5;
-		-webkit-animation-name: flash-1;
 		animation-name: flash-1;
-		-webkit-animation-duration: 2s;
 		animation-duration: 2s;
 	}
 
+	&__lightrope li.green {
+		background: #00f7a5;
+		animation-name: flash-1;
+	}
+	&__lightrope li.blue {
+		background: rgb(9, 79, 209);
+		animation-name: flash-2;
+	}
+	&__lightrope li.magenta {
+		background: #f70094;
+		animation-name: flash-3;
+	}
+	&__lightrope li.orange {
+		background: #c48716;
+		animation-name: flash-4;
+	}
+
 	&__lightrope li:nth-child(4n + 1).active {
-		background: cyan;
-		box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.5);
+		background: rgb(9, 79, 209);
+		box-shadow: 0px 4.66667px 24px 3px rgb(34, 93, 202);
 		-webkit-animation-name: flash-2;
 		animation-name: flash-2;
 		-webkit-animation-duration: 0.4s;
@@ -143,24 +156,24 @@
 @-webkit-keyframes flash-2 {
 	0%,
 	100% {
-		background: cyan;
-		box-shadow: 0px 4.66667px 24px 3px cyan;
+		background: rgb(9, 79, 209);
+		box-shadow: 0px 4.66667px 24px 3px rgb(9, 79, 209);
 	}
 	50% {
-		background: rgba(0, 255, 255, 0.4);
-		box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.2);
+		background: rgb(34, 93, 202);
+		box-shadow: 0px 4.66667px 24px 3px rgb(34, 93, 202);
 	}
 }
 
 @keyframes flash-2 {
 	0%,
 	100% {
-		background: cyan;
-		box-shadow: 0px 4.66667px 24px 3px cyan;
+		background: rgb(9, 79, 209);
+		box-shadow: 0px 4.66667px 24px 3px rgb(9, 79, 209);
 	}
 	50% {
-		background: rgba(0, 255, 255, 0.4);
-		box-shadow: 0px 4.66667px 24px 3px rgba(0, 255, 255, 0.2);
+		background: rgb(34, 93, 202);
+		box-shadow: 0px 4.66667px 24px 3px rgb(34, 93, 202);
 	}
 }
 
@@ -300,6 +313,31 @@
 	}
 
 	&__garland-wrapper {
+		display: flex;
+		column-gap: 20px;
+	}
+
+	&__garland-item {
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		box-shadow: rgb(0 0 0 / 5%) 0 -1px 7px 1px, inset #441313 0 -1px 4px, #ccc 0 2px 12px;
+	}
+
+	&__garland-item:first-child {
+		background: #00f7a5;
+	}
+	&__garland-item:nth-child(2) {
+		background: rgb(9, 79, 209);
+	}
+	&__garland-item:nth-child(3) {
+		background: #f70094;
+	}
+	&__garland-item:nth-child(4) {
+		background: #c48716;
+	}
+	&__garland-item:nth-child(5) {
+		background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8);
 	}
 }
 .prepared-decorations {
