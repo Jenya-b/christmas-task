@@ -301,7 +301,7 @@ export class Module {
 	}
 
 	hangToysOnTheTree() {
-		const toys = document.querySelectorAll('.prepared-decorations__toys-image-wrapper');
+		const toys = document.querySelectorAll('.prepared-decorations__toys-image-wrapper img');
 		const tree = document.querySelector('area');
 		let element: HTMLElement;
 
@@ -319,8 +319,15 @@ export class Module {
 		});
 
 		tree?.addEventListener('drop', (e) => {
+			const nextSibling = element.parentElement?.nextSibling as HTMLElement;
+			let count = +nextSibling.innerText;
+
 			element.style.left = `${+element.style.left.split('px')[0] + (e.clientX - dragX)}px`;
 			element.style.top = `${+element.style.top.split('px')[0] + (e.clientY - dragY)}px`;
+
+			if (count) {
+				nextSibling.textContent = `${--count}`;
+			}
 		});
 	}
 
@@ -706,17 +713,26 @@ export class Module {
 
 			const imgWrapper = document.createElement('div');
 			imgWrapper.classList.add('prepared-decorations__toys-image-wrapper');
-
-			const img = document.createElement('img');
-			img.src = `${url}/${i}.png`;
-
-			imgWrapper.append(img);
+			imgWrapper.append(...addImage(data, i));
 
 			item.append(imgWrapper, num);
 			arr.push(item);
 		}
 
 		wrapper?.append(...arr);
+
+		function addImage(data: IData[], n: number) {
+			const arr: HTMLElement[] = [];
+			const count = +data[n].count;
+
+			for (let i = 0; i < count; i++) {
+				const img = document.createElement('img');
+				img.src = `${url}/${n}.png`;
+				arr.push(img);
+			}
+
+			return arr;
+		}
 	}
 }
 
