@@ -3,6 +3,8 @@ import { IComponent } from './component';
 import noUiSlider, { API, target } from 'nouislider';
 import 'nouislider/dist/nouislider.css';
 
+let dragX = 0;
+let dragY = 0;
 const audio = new Audio();
 audio.src = 'https://jenya-b.github.io/json/audio/audio.mp3';
 audio.loop = true;
@@ -295,6 +297,30 @@ export class Module {
 
 		garlandsList.forEach((el) => {
 			el.className = color;
+		});
+	}
+
+	hangToysOnTheTree() {
+		const toys = document.querySelectorAll('.prepared-decorations__toys-image-wrapper');
+		const tree = document.querySelector('area');
+		let element: HTMLElement;
+
+		toys.forEach((el) => {
+			el.addEventListener('dragstart', (e) => {
+				element = el as HTMLElement;
+				const event = e as DragEvent;
+				dragX = event.clientX;
+				dragY = event.clientY;
+			});
+		});
+
+		tree?.addEventListener('dragover', (e) => {
+			e.preventDefault();
+		});
+
+		tree?.addEventListener('drop', (e) => {
+			element.style.left = `${+element.style.left.split('px')[0] + (e.clientX - dragX)}px`;
+			element.style.top = `${+element.style.top.split('px')[0] + (e.clientY - dragY)}px`;
 		});
 	}
 
@@ -640,6 +666,7 @@ export class Module {
 		}
 
 		treesWrapper?.append(...treeArray);
+		setTimeout(this.hangToysOnTheTree, 1000);
 	}
 
 	addBackgroundImageOptions() {
@@ -672,12 +699,20 @@ export class Module {
 			const item = document.createElement('div');
 			item.classList.add('prepared-decorations__toys-item');
 			item.id = `toys-item-${i}`;
+
 			const num = document.createElement('div');
 			num.classList.add('prepared-decorations__toys-item-count');
 			num.innerText = `${data[i].count}`;
+
+			const imgWrapper = document.createElement('div');
+			imgWrapper.classList.add('prepared-decorations__toys-image-wrapper');
+
 			const img = document.createElement('img');
 			img.src = `${url}/${i}.png`;
-			item.append(img, num);
+
+			imgWrapper.append(img);
+
+			item.append(imgWrapper, num);
 			arr.push(item);
 		}
 

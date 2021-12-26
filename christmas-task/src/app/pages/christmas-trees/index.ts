@@ -48,7 +48,13 @@ export const appChristmasTrees = new AppChristmasTrees({
 						
 					</div>
 					<div class="christmas-game__tree">
-						<img src="https://jenya-b.github.io/json/tree/2.png">
+						<img src="https://jenya-b.github.io/json/tree/2.png" usemap="#image-map">
+						<map name="image-map">
+      				<area
+        				coords="252,3,200,93,164,184,130,271,107,327,92,389,67,456,29,548,18,580,23,618,121,648,174,669,245,664,323,673,411,649,469,602,490,579,364,233"
+        				shape="poly"
+      				/>
+    				</map>
 					</div>
 				</div>
 				<div class="christmas-game__prepared-decorations prepared-decorations">
