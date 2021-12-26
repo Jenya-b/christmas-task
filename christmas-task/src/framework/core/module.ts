@@ -327,26 +327,30 @@ export class Module {
 			element.style.left = `${+element.style.left.split('px')[0] + (e.clientX - dragX)}px`;
 			element.style.top = `${+element.style.top.split('px')[0] + (e.clientY - dragY)}px`;
 
-			if (count) {
+			if (count && !element.classList.contains('out')) {
+				element.classList.add('out');
 				nextSibling.textContent = `${--count}`;
 			}
 		});
 
-		toysWrapper?.addEventListener('dragover', (e) => {
+		document.addEventListener('dragover', (e) => {
 			e.preventDefault();
 		});
 
-		toysWrapper?.addEventListener('drop', (e) => {
-			const nextSibling = element.parentElement?.nextSibling as HTMLElement;
-			let count = +nextSibling.innerText;
-			nextSibling.textContent = `${++count}`;
+		document.addEventListener('drop', (e) => {
+			const target = e.target as HTMLElement;
 
-			element.style.left = `0px`;
-			element.style.top = `0px`;
+			if (target != tree && target != element) {
+				const nextSibling = element.parentElement?.nextSibling as HTMLElement;
+				let count = +nextSibling.innerText;
+				nextSibling.textContent = `${++count}`;
+
+				element.style.left = `0px`;
+				element.style.top = `0px`;
+				element.classList.remove('out');
+			}
 		});
 	}
-
-	putToyInSlot() {}
 
 	setInfoForButtons() {
 		const formButtonsWrapper = document.querySelector('.form-toys__wrapper') as HTMLElement;
