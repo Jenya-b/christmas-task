@@ -301,6 +301,8 @@ export class Module {
 	}
 
 	hangToysOnTheTree() {
+		const toysWrapper = document.querySelector('.prepared-decorations__toys');
+		const toysItem = document.querySelector('.prepared-decorations__toys-item');
 		const toys = document.querySelectorAll('.prepared-decorations__toys-image-wrapper img');
 		const tree = document.querySelector('area');
 		let element: HTMLElement;
@@ -329,7 +331,22 @@ export class Module {
 				nextSibling.textContent = `${--count}`;
 			}
 		});
+
+		toysWrapper?.addEventListener('dragover', (e) => {
+			e.preventDefault();
+		});
+
+		toysWrapper?.addEventListener('drop', (e) => {
+			const nextSibling = element.parentElement?.nextSibling as HTMLElement;
+			let count = +nextSibling.innerText;
+			nextSibling.textContent = `${++count}`;
+
+			element.style.left = `0px`;
+			element.style.top = `0px`;
+		});
 	}
+
+	putToyInSlot() {}
 
 	setInfoForButtons() {
 		const formButtonsWrapper = document.querySelector('.form-toys__wrapper') as HTMLElement;
@@ -725,7 +742,7 @@ export class Module {
 			const arr: HTMLElement[] = [];
 			const count = +data[n].count;
 
-			for (let i = 0; i < count; i++) {
+			for (let i = 1; i <= count; i++) {
 				const img = document.createElement('img');
 				img.src = `${url}/${n}.png`;
 				arr.push(img);
