@@ -13,7 +13,7 @@ export const appHomePage = new AppHomePage({
 		<div class="home-page">
 			<div class="home-page__info-block">
 				<h1 class="home-page__title">Новогодняя игра <br>«Наряди ёлку»</h1>
-				<button class="home-page__button">Начать</button>
+				<a href="#decor" class="home-page__button">Начать</a>
 			</div>
 			<div class="home-page__decor-block">
 				<div class="home-page__big-ball home-page__ball"></div>
