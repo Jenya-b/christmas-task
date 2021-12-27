@@ -246,6 +246,7 @@
 		height: 35px;
 		background-image: url('./assets/svg/snow.svg');
 		background-size: contain;
+		cursor: pointer;
 	}
 
 	&__snow.active,
@@ -258,6 +259,7 @@
 		height: 35px;
 		background-image: url('./assets/svg/audio.svg');
 		background-size: contain;
+		cursor: pointer;
 	}
 
 	&__trees {
@@ -279,6 +281,7 @@
 		position: relative;
 		overflow: hidden;
 		padding: 0 0 150% 0;
+		cursor: pointer;
 	}
 
 	&__trees-item img {
@@ -304,6 +307,7 @@
 		overflow: hidden;
 		padding: 0 0 100% 0;
 		border-radius: 10px;
+		cursor: pointer;
 	}
 
 	&__background-item img {
@@ -431,6 +435,7 @@
 		position: absolute;
 		top: 0;
 		left: 0;
+		cursor: all-scroll;
 	}
 
 	&__toys-item-count {
