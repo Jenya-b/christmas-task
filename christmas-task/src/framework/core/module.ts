@@ -8,6 +8,7 @@ let dragY = 0;
 const audio = new Audio();
 audio.src = 'https://jenya-b.github.io/json/audio/audio.mp3';
 audio.loop = true;
+audio.autoplay = true;
 
 let storageToys: Set<number> = new Set();
 if (localStorage.getItem('toysFavorite')) {
@@ -91,12 +92,23 @@ export class Module {
 			this.addBackgroundImageOptions();
 			this.addToysFromFavorites();
 			this.addEventsForTrees();
+			this.getStorageSettings();
 		}
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
 	renderComponent(c: any) {
 		c.render();
+	}
+
+	getStorageSettings() {
+		const snowBtn = document.querySelector('.settings-game__snow') as HTMLElement;
+		const snow = document.querySelector('.christmas-game__tree') as HTMLElement;
+
+		if (localStorage.getItem('snow')) {
+			snow.className = localStorage.getItem('snow') as string;
+			snowBtn.className = localStorage.getItem('snowBtn') as string;
+		}
 	}
 
 	async getInfo() {
@@ -207,7 +219,7 @@ export class Module {
 		snowBtn?.addEventListener('click', (e) => this.addSnow(e));
 
 		const audioBtn = document.querySelector('.settings-game__audio');
-		audioBtn?.addEventListener('click', (e) => this.addAudio(e));
+		audioBtn?.addEventListener('click', this.addAudio);
 
 		this.addGarlands();
 
@@ -246,19 +258,22 @@ export class Module {
 
 	addSnow(e: Event) {
 		const btn = e.target as HTMLElement;
-		const block = document.querySelector('.christmas-game__tree');
+		const block = document.querySelector('.christmas-game__tree') as HTMLElement;
 
 		if (block?.classList.contains('snow')) {
 			btn.classList.remove('active');
 			block.classList.remove('snow');
 		} else {
 			btn.classList.add('active');
-			block?.classList.add('snow');
+			block.classList.add('snow');
 		}
+
+		localStorage.setItem('snow', block.className);
+		localStorage.setItem('snowBtn', btn.className);
 	}
 
-	addAudio(e: Event) {
-		const btn = e.target as HTMLElement;
+	addAudio() {
+		const btn = document.querySelector('.settings-game__audio') as HTMLElement;
 
 		if (audio.paused) {
 			btn.classList.add('active');
@@ -267,6 +282,8 @@ export class Module {
 			btn.classList.remove('active');
 			audio.pause();
 		}
+
+		localStorage.setItem('audioBtn', btn.className);
 	}
 
 	addGarlands() {
