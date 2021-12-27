@@ -8,6 +8,12 @@ let dragY = 0;
 const audio = new Audio();
 audio.src = 'https://jenya-b.github.io/json/audio/audio.mp3';
 audio.loop = true;
+
+let storageToys: Set<number> = new Set();
+if (localStorage.getItem('toysFavorite')) {
+	const x = localStorage.getItem('toysFavorite') as string;
+	storageToys = new Set(JSON.parse(x));
+}
 interface IData {
 	num: string;
 	name: string;
@@ -103,16 +109,18 @@ export class Module {
 	async addCardToysOnPage() {
 		const data = await this.getInfo();
 		const toysWrapper = document.querySelector('.gallery-toys__items') as HTMLElement;
+		const arrFavoritToys: number[] = [...storageToys];
+		addNumberFavoriteToys(arrFavoritToys);
 
 		for (let i = 0; i < data.length; i++) {
-			toysWrapper.append(...this.getListContent(data[i]));
+			toysWrapper.append(...this.getListContent(data[i], i, arrFavoritToys));
 		}
 		setTimeout(() => this.sortAlphabetically(-1, 1));
 		setTimeout(this.addToysToFavorites, 100);
 		setTimeout(this.findOnTheCardPage, 100);
 	}
 
-	getListContent(data: IData): HTMLElement[] {
+	getListContent(data: IData, numElement: number, arrFavoritToys: number[]): HTMLElement[] {
 		const result: HTMLElement[] = [];
 		const list: HTMLElement[] = [];
 
@@ -142,7 +150,10 @@ export class Module {
 			list.push(li);
 		}
 
+		toy.id = `${numElement}`;
 		toy.classList.add('gallery-toys__item', 'toy');
+		if (arrFavoritToys.includes(+toy.id)) toy.classList.add('active');
+
 		name.className = 'toy__name';
 		img.className = 'toy__image';
 		ul.className = 'toy__list';
@@ -301,8 +312,6 @@ export class Module {
 	}
 
 	hangToysOnTheTree() {
-		const toysWrapper = document.querySelector('.prepared-decorations__toys');
-		const toysItem = document.querySelector('.prepared-decorations__toys-item');
 		const toys = document.querySelectorAll('.prepared-decorations__toys-image-wrapper img');
 		const tree = document.querySelector('area');
 		let element: HTMLElement;
@@ -622,27 +631,32 @@ export class Module {
 
 	addToysToFavorites() {
 		const toyList = document.querySelectorAll('.gallery-toys__item');
-		const headerCounter = document.querySelector('.header__counter')?.querySelector('span');
+		const headerCounter = document.querySelector('.header__counter span') as HTMLElement;
 		const popUpWarning = document.querySelector('.pop-up-warning') as HTMLElement;
-		let count = 0;
+		const headerCounterContent = headerCounter.textContent as string;
+		let count = +headerCounterContent;
 
 		toyList.forEach((el) => {
 			el.addEventListener('click', (e) => {
 				const element = e.currentTarget as HTMLElement;
+				const elementNum = +element.id;
 				const maxValue = 20;
 
 				if (!element.classList.contains('active') && count < maxValue) {
 					element.classList.add('active');
 					count++ as number;
+					storageToys.add(elementNum);
 				} else if (element.classList.contains('active')) {
 					element.classList.remove('active');
 					count-- as number;
+					storageToys.delete(elementNum);
 				} else if (count === maxValue) {
 					popUpWarning.classList.add('active');
 					setTimeout(() => popUpWarning.classList.remove('active'), 2000);
 				}
 
 				(headerCounter as HTMLElement).innerText = String(count);
+				localStorage.setItem('toysFavorite', JSON.stringify([...storageToys]));
 			});
 		});
 	}
@@ -721,7 +735,10 @@ export class Module {
 		const wrapper = document.querySelector('.prepared-decorations__toys-wrapper');
 		const arr: HTMLElement[] = [];
 		const url = 'https://jenya-b.github.io/json/toys';
-		const count = 20;
+		const arrFavoritToys: number[] = [...storageToys];
+		addNumberFavoriteToys(arrFavoritToys);
+
+		const count = arrFavoritToys.length || 20;
 
 		for (let i = 1; i <= count; i++) {
 			const item = document.createElement('div');
@@ -730,11 +747,19 @@ export class Module {
 
 			const num = document.createElement('div');
 			num.classList.add('prepared-decorations__toys-item-count');
-			num.innerText = `${data[i].count}`;
+
+			if (arrFavoritToys.length) {
+				num.innerText = `${data[arrFavoritToys[i - 1]].count}`;
+			} else num.innerText = `${data[i].count}`;
 
 			const imgWrapper = document.createElement('div');
 			imgWrapper.classList.add('prepared-decorations__toys-image-wrapper');
-			imgWrapper.append(...addImage(data, i));
+
+			if (arrFavoritToys.length) {
+				imgWrapper.append(...addImage(data, arrFavoritToys[i - 1]));
+			} else {
+				imgWrapper.append(...addImage(data, i));
+			}
 
 			item.append(imgWrapper, num);
 			arr.push(item);
@@ -748,7 +773,7 @@ export class Module {
 
 			for (let i = 1; i <= count; i++) {
 				const img = document.createElement('img');
-				img.src = `${url}/${n}.png`;
+				img.src = `${url}/${n + 1}.png`;
 				arr.push(img);
 			}
 
@@ -765,4 +790,9 @@ function displayWarning(count: number) {
 	} else {
 		infoText.classList.remove('hide');
 	}
+}
+
+function addNumberFavoriteToys(arrFavoritToys: number[]) {
+	const toysCounter = document.querySelector('.header__counter span') as HTMLElement;
+	toysCounter.innerText = `${arrFavoritToys.length}`;
 }
