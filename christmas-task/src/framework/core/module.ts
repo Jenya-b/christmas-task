@@ -42,6 +42,11 @@ enum SortEnum {
 	yearFromMinToMax = '3',
 	yearFromMaxToMin = '4',
 }
+
+enum PageSections {
+	decor = 'decor',
+	tree = 'tree',
+}
 export class Module {
 	components: ObjectRenderType;
 	bootstrapComponent: object;
@@ -79,7 +84,7 @@ export class Module {
 		const inputSearch = document.querySelector('.header__search') as HTMLInputElement;
 		inputSearch.focus();
 
-		if (route?.path === 'decor') {
+		if (route?.path === PageSections.decor) {
 			this.setInfoForButtons();
 			this.addCardToysOnPage();
 			this.setRangeOfInstances();
@@ -87,7 +92,7 @@ export class Module {
 			this.addEventsForToys();
 		}
 
-		if (route?.path === 'tree') {
+		if (route?.path === PageSections.tree) {
 			this.addTreesOnPage();
 			this.addBackgroundImageOptions();
 			this.addToysFromFavorites();
