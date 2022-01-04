@@ -47,6 +47,14 @@ enum PageSections {
 	decor = 'decor',
 	tree = 'tree',
 }
+
+enum Colour {
+	blue = 'blue',
+	magenta = 'magenta',
+	orange = 'orange',
+	green = 'green',
+	multicolored = 'multicolored',
+}
 export class Module {
 	components: ObjectRenderType;
 	bootstrapComponent: object;
@@ -120,8 +128,8 @@ export class Module {
 	async getInfo() {
 		const url = 'https://jenya-b.github.io/json/data.json';
 		const responce = await fetch(url);
-		const data = await responce.json();
-		return data as IData[];
+		const data: IData[] = await responce.json();
+		return data;
 	}
 
 	async addCardToysOnPage() {
@@ -323,11 +331,11 @@ export class Module {
 		const garlandsList = document.querySelectorAll('.christmas-game__lightrope li');
 		let color: string;
 
-		if (element.id === 'blue') color = 'blue';
-		else if (element.id === 'magenta') color = 'magenta';
-		else if (element.id === 'orange') color = 'orange';
-		else if (element.id === 'green') color = 'green';
-		else if (element.id === 'multicolored') color = 'active';
+		if (element.id === Colour.blue) color = Colour.blue;
+		else if (element.id === Colour.magenta) color = Colour.magenta;
+		else if (element.id === Colour.orange) color = Colour.orange;
+		else if (element.id === Colour.green) color = Colour.green;
+		else if (element.id === Colour.multicolored) color = 'active';
 
 		garlandsList.forEach((el) => {
 			el.className = color;
