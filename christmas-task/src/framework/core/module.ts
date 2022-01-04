@@ -107,12 +107,13 @@ export class Module {
 	}
 
 	getStorageSettings() {
-		const snowBtn = document.querySelector('.settings-game__snow') as HTMLElement;
-		const snow = document.querySelector('.christmas-game__tree') as HTMLElement;
+		const snowBtn = document.querySelector('.settings-game__snow');
+		const snow = document.querySelector('.christmas-game__tree');
+		const snowItem = localStorage.getItem('snow');
 
-		if (localStorage.getItem('snow')) {
-			snow.className = localStorage.getItem('snow') as string;
-			snowBtn.className = localStorage.getItem('snowBtn') as string;
+		if (snowItem && snow && snowBtn) {
+			snow.className = snowItem;
+			snowBtn.className = snowItem;
 		}
 	}
 
