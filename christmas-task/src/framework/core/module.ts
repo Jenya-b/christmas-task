@@ -166,8 +166,9 @@ export class Module {
 			const parameterName = arrNames[i];
 			const parameterValue = data[arrValues[i]];
 			const li = document.createElement('li');
+			const fav = 'favorite';
 			li.classList.add(`toy__item`, `toy__item-${arrValues[i]}`);
-			if (arrValues[i] === 'favorite') {
+			if (arrValues[i] === fav) {
 				if (parameterValue) {
 					li.innerText = `${parameterName}: да`;
 				} else {
