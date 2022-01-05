@@ -12,8 +12,8 @@ audio.autoplay = true;
 
 let storageToys: Set<number> = new Set();
 if (localStorage.getItem('toysFavorite')) {
-	const x = localStorage.getItem('toysFavorite') as string;
-	storageToys = new Set(JSON.parse(x));
+	const toysFavoriteItem = localStorage.getItem('toysFavorite');
+	if (toysFavoriteItem) storageToys = new Set(JSON.parse(toysFavoriteItem));
 }
 interface IData {
 	num: string;
@@ -84,13 +84,14 @@ export class Module {
 	renderRoute() {
 		const url = router.getUrl();
 		const route = this.routes.find((r) => r.path === url);
-		(document.querySelector(
-			'dinamic-page'
-		) as HTMLElement).innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
+		const dinamicPage = document.querySelector('dinamic-page');
+		if (dinamicPage) {
+			dinamicPage.innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
+		}
 		this.renderComponent(route?.component);
 
-		const inputSearch = document.querySelector('.header__search') as HTMLInputElement;
-		inputSearch.focus();
+		const inputSearch: HTMLInputElement | null = document.querySelector('.header__search');
+		if (inputSearch) inputSearch.focus();
 
 		if (route?.path === PageSections.decor) {
 			this.setInfoForButtons();
@@ -134,12 +135,14 @@ export class Module {
 
 	async addCardToysOnPage() {
 		const data = await this.getInfo();
-		const toysWrapper = document.querySelector('.gallery-toys__items') as HTMLElement;
+		const toysWrapper = document.querySelector('.gallery-toys__items');
 		const arrFavoritToys: number[] = [...storageToys];
 		addNumberFavoriteToys(arrFavoritToys);
 
 		for (let i = 0; i < data.length; i++) {
-			toysWrapper.append(...this.getListContent(data[i], i, arrFavoritToys));
+			if (toysWrapper) {
+				toysWrapper.append(...this.getListContent(data[i], i, arrFavoritToys));
+			}
 		}
 		setTimeout(() => this.sortAlphabetically(-1, 1));
 		setTimeout(this.addToysToFavorites, 100);
@@ -193,8 +196,10 @@ export class Module {
 	}
 
 	addEventsForToys() {
-		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
-		inputCheckbox.addEventListener('change', this.filterToys.bind(this));
+		const inputCheckbox = document.querySelector('#like-toys');
+		if (inputCheckbox) {
+			inputCheckbox.addEventListener('change', this.filterToys.bind(this));
+		}
 
 		const formToyButtons = document.querySelectorAll('.form-toys__button');
 		formToyButtons.forEach((el) => {
@@ -211,11 +216,15 @@ export class Module {
 			el.addEventListener('click', (e) => this.addActiveStyle(e.target as EventTarget));
 		});
 
-		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
-		buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
+		const buttonSettingsReset = document.querySelector('.settings-reset');
+		if (buttonSettingsReset) {
+			buttonSettingsReset.addEventListener('click', this.resetFilters.bind(this));
+		}
 
-		const select = document.querySelector('.content-decor__select') as HTMLSelectElement;
-		select.addEventListener('change', (e) => this.setDataForSorting(e));
+		const select = document.querySelector('.content-decor__select');
+		if (select) {
+			select.addEventListener('change', (e) => this.setDataForSorting(e));
+		}
 	}
 
 	addEventsForTrees() {
@@ -255,49 +264,56 @@ export class Module {
 	chooseTreeForDecoration(e: Event) {
 		const element = e.currentTarget as HTMLElement;
 		const num = element.id.replace(/\D/gi, '');
-		const img = document.querySelector('.christmas-game__tree img') as HTMLImageElement;
+		const img: HTMLImageElement | null = document.querySelector('.christmas-game__tree img');
 		const url = 'https://jenya-b.github.io/json/tree';
 
-		img.src = `${url}/${num}.png`;
+		if (img) {
+			img.src = `${url}/${num}.png`;
+		}
 	}
 
 	chooseBackgroundPicture(e: Event) {
 		const element = e.currentTarget as HTMLElement;
 		const num = element.id.replace(/\D/gi, '');
-		const bg = document.querySelector('.christmas-game__place-tree') as HTMLImageElement;
+		const bg: HTMLElement | null = document.querySelector('.christmas-game__place-tree');
 		const url = 'https://jenya-b.github.io/json/bg';
 
-		bg.style.backgroundImage = `url(${url}/${num}.jpg)`;
+		if (bg) {
+			bg.style.backgroundImage = `url(${url}/${num}.jpg)`;
+		}
 	}
 
 	addSnow(e: Event) {
 		const btn = e.target as HTMLElement;
-		const block = document.querySelector('.christmas-game__tree') as HTMLElement;
+		const block: HTMLElement | null = document.querySelector('.christmas-game__tree');
 
-		if (block?.classList.contains('snow')) {
+		if (block?.classList.contains('snow') && block) {
 			btn.classList.remove('active');
 			block.classList.remove('snow');
-		} else {
+		} else if (block) {
 			btn.classList.add('active');
 			block.classList.add('snow');
 		}
-
-		localStorage.setItem('snow', block.className);
-		localStorage.setItem('snowBtn', btn.className);
+		if (block) {
+			localStorage.setItem('snow', block.className);
+			localStorage.setItem('snowBtn', btn.className);
+		}
 	}
 
 	addAudio() {
-		const btn = document.querySelector('.settings-game__audio') as HTMLElement;
+		const btn = document.querySelector('.settings-game__audio');
 
-		if (audio.paused) {
+		if (audio.paused && btn) {
 			btn.classList.add('active');
 			audio.play();
-		} else {
+		} else if (btn) {
 			btn.classList.remove('active');
 			audio.pause();
 		}
 
-		localStorage.setItem('audioBtn', btn.className);
+		if (btn) {
+			localStorage.setItem('audioBtn', btn.className);
+		}
 	}
 
 	addGarlands() {
@@ -393,20 +409,26 @@ export class Module {
 	}
 
 	setInfoForButtons() {
-		const formButtonsWrapper = document.querySelector('.form-toys__wrapper') as HTMLElement;
+		const formButtonsWrapper: HTMLElement | null = document.querySelector('.form-toys__wrapper');
 		const formArr = ['ball', 'bell', 'cone', 'toy', 'snowflake'];
 		const formClassName = 'form-toys';
-		this.createFilterButtonsForm(formButtonsWrapper, formArr, formClassName);
+		if (formButtonsWrapper) {
+			this.createFilterButtonsForm(formButtonsWrapper, formArr, formClassName);
+		}
 
-		const colorButtonsWrapper = document.querySelector('.color-toys__wrapper') as HTMLElement;
+		const colorButtonsWrapper: HTMLElement | null = document.querySelector('.color-toys__wrapper');
 		const colorArr = ['white', 'yellow', 'red', 'green', 'blue'];
 		const colorClassName = 'color-toys';
-		this.createFilterButtonsForm(colorButtonsWrapper, colorArr, colorClassName);
+		if (colorButtonsWrapper) {
+			this.createFilterButtonsForm(colorButtonsWrapper, colorArr, colorClassName);
+		}
 
-		const sizeButtonsWrapper = document.querySelector('.size-toys__wrapper') as HTMLElement;
+		const sizeButtonsWrapper: HTMLElement | null = document.querySelector('.size-toys__wrapper');
 		const sizeArr = ['big', 'average', 'little'];
 		const sizeClassName = 'size-toys';
-		this.createFilterButtonsForm(sizeButtonsWrapper, sizeArr, sizeClassName);
+		if (sizeButtonsWrapper) {
+			this.createFilterButtonsForm(sizeButtonsWrapper, sizeArr, sizeClassName);
+		}
 	}
 
 	createFilterButtonsForm(parentElement: HTMLElement, arr: string[], className: string) {
@@ -423,21 +445,25 @@ export class Module {
 	}
 
 	setRangeOfInstances() {
-		const rangeSlider = document.querySelector('#count-toys-slider') as target;
-		const input0 = document.querySelector('#count-range-0') as HTMLElement;
-		const input1 = document.querySelector('#count-range-1') as HTMLElement;
+		const rangeSlider: target | null = document.querySelector('#count-toys-slider');
+		const input0: HTMLElement | null = document.querySelector('#count-range-0');
+		const input1: HTMLElement | null = document.querySelector('#count-range-1');
 		const min = 1;
 		const max = 12;
-		this.setRange(rangeSlider, input0, input1, min, max);
+		if (rangeSlider && input0 && input1) {
+			this.setRange(rangeSlider, input0, input1, min, max);
+		}
 	}
 
 	setRangeOfYears() {
-		const rangeSlider = document.querySelector('#year-toys-slider') as target;
-		const input0 = document.querySelector('#year-range-0') as HTMLElement;
-		const input1 = document.querySelector('#year-range-1') as HTMLElement;
+		const rangeSlider: target | null = document.querySelector('#year-toys-slider');
+		const input0: HTMLElement | null = document.querySelector('#year-range-0');
+		const input1: HTMLElement | null = document.querySelector('#year-range-1');
 		const min = 1940;
 		const max = 2021;
-		this.setRange(rangeSlider, input0, input1, min, max);
+		if (rangeSlider && input0 && input1) {
+			this.setRange(rangeSlider, input0, input1, min, max);
+		}
 	}
 
 	setRange(rangeSlider: target, input0: HTMLElement, input1: HTMLElement, min: number, max: number) {
@@ -461,22 +487,30 @@ export class Module {
 				}
 			});
 		}
-		const buttonSettingsReset = document.querySelector('.settings-reset') as HTMLButtonElement;
-		buttonSettingsReset.addEventListener('click', () => {
-			rangeSlider.noUiSlider.reset();
-		});
+		const buttonSettingsReset = document.querySelector('.settings-reset');
+		if (buttonSettingsReset) {
+			buttonSettingsReset.addEventListener('click', () => {
+				rangeSlider.noUiSlider.reset();
+			});
+		}
 	}
 
 	filterToys() {
 		const toys = document.querySelectorAll('.toy');
 		const countList = document.querySelectorAll('.toy__item-count');
-		const countLeftBorder = document.querySelector('#count-range-0') as HTMLElement;
-		const countRightBorder = document.querySelector('#count-range-1') as HTMLElement;
-		const arrCountBorder = [countLeftBorder.textContent as string, countRightBorder.textContent as string];
+		const countLeftBorder = document.querySelector('#count-range-0');
+		const countRightBorder = document.querySelector('#count-range-1');
+		let arrCountBorder: string[] = [];
+		if (countLeftBorder && countRightBorder) {
+			arrCountBorder = [countLeftBorder.textContent as string, countRightBorder.textContent as string];
+		}
 		const yearList = document.querySelectorAll('.toy__item-year');
-		const yearLeftBorder = document.querySelector('#year-range-0') as HTMLElement;
-		const yearRightBorder = document.querySelector('#year-range-1') as HTMLElement;
-		const arrYearBorder = [yearLeftBorder.textContent as string, yearRightBorder.textContent as string];
+		const yearLeftBorder = document.querySelector('#year-range-0');
+		const yearRightBorder = document.querySelector('#year-range-1');
+		let arrYearBorder: string[] = [];
+		if (yearLeftBorder && yearRightBorder) {
+			arrYearBorder = [yearLeftBorder.textContent as string, yearRightBorder.textContent as string];
+		}
 		const favoriteToys = document.querySelectorAll('.toy__item-favorite');
 		const shapeToys = document.querySelectorAll('.toy__item-shape');
 		const colorToys = document.querySelectorAll('.toy__item-color');
@@ -496,7 +530,7 @@ export class Module {
 				toy.classList.add('hide');
 			} else {
 				toy.classList.remove('hide');
-				count++ as number;
+				count++;
 			}
 		}
 
@@ -514,11 +548,11 @@ export class Module {
 	}
 
 	filterByFavoriteToys(element: Element) {
-		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
-		const value = element.textContent as string;
+		const inputCheckbox: HTMLInputElement | null = document.querySelector('#like-toys');
+		const value = element.textContent;
 		const regexp = /: нет/i;
 
-		if (inputCheckbox.checked && regexp.test(value)) {
+		if (inputCheckbox && value && inputCheckbox.checked && regexp.test(value)) {
 			return true;
 		}
 		return false;
@@ -574,7 +608,7 @@ export class Module {
 	}
 
 	getFilterValue(element: Element, regexp: RegExp, buttons: NodeListOf<Element>, obj: TObjFilterButton) {
-		const elementInfo = element.textContent?.match(regexp)?.join('') as string;
+		const elementInfo = element.textContent?.match(regexp)?.join('');
 		let a = 0;
 
 		for (let i = 0; i < buttons.length; i++) {
@@ -582,7 +616,7 @@ export class Module {
 			if (button.classList.contains('active') && obj[button.id] === elementInfo) {
 				return true;
 			} else if (!button.classList.contains('active')) {
-				a++ as number;
+				a++;
 			}
 		}
 		if (a === buttons.length) return true;
@@ -593,12 +627,12 @@ export class Module {
 		const formToyButtons = document.querySelectorAll('.form-toys__button');
 		const colorToyButtons = document.querySelectorAll('.color-toys__button');
 		const sizeToyButtons = document.querySelectorAll('.size-toys__button');
-		const inputCheckbox = document.querySelector('#like-toys') as HTMLInputElement;
+		const inputCheckbox: HTMLInputElement | null = document.querySelector('#like-toys');
 
 		formToyButtons.forEach((el) => this.resetActiveClass(el));
 		colorToyButtons.forEach((el) => this.resetActiveClass(el));
 		sizeToyButtons.forEach((el) => this.resetActiveClass(el));
-		inputCheckbox.checked = false;
+		if (inputCheckbox) inputCheckbox.checked = false;
 
 		this.filterToys();
 	}
@@ -619,53 +653,56 @@ export class Module {
 	sortAlphabetically(x: number, y: number) {
 		const toys = document.querySelectorAll('div.gallery-toys__item');
 		const itemsArray: Element[] = [];
-		const parent = toys[0].parentNode as ParentNode;
+		const parent: ParentNode | null = toys[0].parentNode;
 
 		for (let i = 0; i < toys.length; i++) {
-			itemsArray.push((parent as Element).removeChild(toys[i]));
+			if (parent) itemsArray.push(parent.removeChild(toys[i]));
 		}
 
 		itemsArray
 			.sort((a: Element, b: Element): number => {
-				const textA = (a.querySelector('h3.toy__name') as Element).textContent as string;
-				const textB = (b.querySelector('h3.toy__name') as Element).textContent as string;
-				if (textA < textB) return x;
-				if (textA > textB) return y;
+				const textA = a.querySelector('h3.toy__name')?.textContent;
+				const textB = b.querySelector('h3.toy__name')?.textContent;
+				if (textA && textB && textA < textB) return x;
+				if (textA && textB && textA > textB) return y;
 				return 0;
 			})
 			.forEach((node) => {
-				parent.appendChild(node);
+				if (parent) parent.appendChild(node);
 			});
 	}
 
 	sortbyYear(x: number, y: number) {
 		const toys = document.querySelectorAll('div.gallery-toys__item');
 		const itemsArray: Element[] = [];
-		const parent = toys[0].parentNode as ParentNode;
+		const parent: ParentNode | null = toys[0].parentNode;
 
 		for (let i = 0; i < toys.length; i++) {
-			itemsArray.push((parent as Element).removeChild(toys[i]));
+			if (parent) itemsArray.push(parent.removeChild(toys[i]));
 		}
 
 		itemsArray
 			.sort((a: Element, b: Element): number => {
-				const textA = (a.querySelector('li.toy__item-year') as Element).textContent?.replace(/\D/gi, '') as string;
-				const textB = (b.querySelector('li.toy__item-year') as Element).textContent?.replace(/\D/gi, '') as string;
-				if (textA < textB) return x;
-				if (textA > textB) return y;
+				const textA = a.querySelector('li.toy__item-year')?.textContent?.replace(/\D/gi, '');
+				const textB = b.querySelector('li.toy__item-year')?.textContent?.replace(/\D/gi, '');
+				if (textA && textB && textA < textB) return x;
+				if (textA && textB && textA > textB) return y;
 				return 0;
 			})
 			.forEach((node) => {
-				parent.appendChild(node);
+				if (parent) parent.appendChild(node);
 			});
 	}
 
 	addToysToFavorites() {
 		const toyList = document.querySelectorAll('.gallery-toys__item');
-		const headerCounter = document.querySelector('.header__counter span') as HTMLElement;
-		const popUpWarning = document.querySelector('.pop-up-warning') as HTMLElement;
-		const headerCounterContent = headerCounter.textContent as string;
-		let count = +headerCounterContent;
+		const headerCounter: HTMLElement | null = document.querySelector('.header__counter span');
+		const popUpWarning = document.querySelector('.pop-up-warning');
+		let count = 0;
+		if (headerCounter) {
+			const headerCounterContent = headerCounter.textContent;
+			if (headerCounterContent) count = +headerCounterContent;
+		}
 
 		toyList.forEach((el) => {
 			el.addEventListener('click', (e) => {
@@ -675,44 +712,49 @@ export class Module {
 
 				if (!element.classList.contains('active') && count < maxValue) {
 					element.classList.add('active');
-					count++ as number;
+					count++;
 					storageToys.add(elementNum);
 				} else if (element.classList.contains('active')) {
 					element.classList.remove('active');
-					count-- as number;
+					count--;
 					storageToys.delete(elementNum);
-				} else if (count === maxValue) {
+				} else if (popUpWarning && count === maxValue) {
 					popUpWarning.classList.add('active');
 					setTimeout(() => popUpWarning.classList.remove('active'), 2000);
 				}
 
-				(headerCounter as HTMLElement).innerText = String(count);
+				if (headerCounter) {
+					headerCounter.innerText = String(count);
+				}
 				localStorage.setItem('toysFavorite', JSON.stringify([...storageToys]));
 			});
 		});
 	}
 
 	findOnTheCardPage() {
-		const inputSearch = document.querySelector('.header__search') as HTMLElement;
-		inputSearch.addEventListener('keyup', setTheDisplayOfCards);
-		inputSearch.addEventListener('search', setTheDisplayOfCards);
+		const inputSearch: HTMLElement | null = document.querySelector('.header__search');
+
+		if (inputSearch) {
+			inputSearch.addEventListener('keyup', setTheDisplayOfCards);
+			inputSearch.addEventListener('search', setTheDisplayOfCards);
+		}
 
 		function setTheDisplayOfCards(e: KeyboardEvent | Event) {
 			const toys = document.querySelectorAll('div.gallery-toys__item');
 			const nameToys = document.querySelectorAll('h3.toy__name');
 
 			const element = e.target as HTMLInputElement;
-			const value = element.value.toUpperCase() as string;
+			const value = element.value.toUpperCase();
 			const regexp = new RegExp(value);
 			let count = 0;
 
 			for (let i = 0; i < nameToys.length; i++) {
 				const element = nameToys[i];
-				const elementText = element.textContent?.toUpperCase() as string;
+				const elementText = element.textContent?.toUpperCase();
 
-				if (elementText.match(regexp)?.input) {
+				if (elementText && elementText.match(regexp)?.input) {
 					toys[i].classList.remove('hide-search');
-					count++ as number;
+					count++;
 				} else {
 					toys[i].classList.add('hide-search');
 				}
@@ -814,16 +856,18 @@ export class Module {
 }
 
 function displayWarning(count: number) {
-	const infoText = document.querySelector('.gallery-toys__error-search') as HTMLElement;
+	const infoText = document.querySelector('.gallery-toys__error-search');
 
-	if (!count) {
+	if (!count && infoText) {
 		infoText.classList.add('hide');
-	} else {
+	} else if (infoText) {
 		infoText.classList.remove('hide');
 	}
 }
 
 function addNumberFavoriteToys(arrFavoritToys: number[]) {
-	const toysCounter = document.querySelector('.header__counter span') as HTMLElement;
-	toysCounter.innerText = `${arrFavoritToys.length}`;
+	const toysCounter: HTMLElement | null = document.querySelector('.header__counter span');
+	if (toysCounter) {
+		toysCounter.innerText = `${arrFavoritToys.length}`;
+	}
 }
