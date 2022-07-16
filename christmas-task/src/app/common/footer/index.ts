@@ -19,4 +19,7 @@ export const appFooter = new AppFooter({
 			</div>
 		</div>
 	`,
+	render() {
+		return;
+	},
 });

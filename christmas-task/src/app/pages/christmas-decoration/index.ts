@@ -71,4 +71,7 @@ export const appChristmasDecoration = new AppChristmasDecoration({
 				</article>
 			</main>
 	`,
+	render() {
+		return;
+	},
 });

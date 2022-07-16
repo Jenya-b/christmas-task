@@ -71,4 +71,7 @@ export const appChristmasTrees = new AppChristmasTrees({
 				</div>
 			</main>
 	`,
+	render() {
+		return;
+	},
 });

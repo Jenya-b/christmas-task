@@ -15,4 +15,7 @@ export const appComponent = new AppComponent({
 		<div class="pop-up-warning">Извините, все слоты заполнены</div>
 		<footer class="footer"></footer>
 	`,
+	render() {
+		return;
+	},
 });

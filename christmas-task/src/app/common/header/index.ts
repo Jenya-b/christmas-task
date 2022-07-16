@@ -30,4 +30,7 @@ export const appHeader = new AppHeader({
 			</div>
 		</div>
 	`,
+	render() {
+		return;
+	},
 });

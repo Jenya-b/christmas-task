@@ -1,6 +1,7 @@
 export interface IComponent {
 	template: string;
 	selector: string;
+	render: () => void;
 }
 
 export class Component implements IComponent {

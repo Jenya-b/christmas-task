@@ -73,7 +73,7 @@ export class Module {
 
 	initComponent() {
 		(this.bootstrapComponent as BootstrapComponentType).render();
-		(this.components as ComponentType).forEach(this.renderComponent.bind(this));
+		(this.components as ComponentType).forEach(this.renderComponent as () => void);
 	}
 
 	initRoutes() {
@@ -88,7 +88,7 @@ export class Module {
 		if (dinamicPage) {
 			dinamicPage.innerHTML = `<${route?.component.selector}></${route?.component.selector}>`;
 		}
-		this.renderComponent(route?.component);
+		this.renderComponent(route!.component);
 
 		const inputSearch: HTMLInputElement | null = document.querySelector('.header__search');
 		if (inputSearch) inputSearch.focus();
@@ -111,9 +111,9 @@ export class Module {
 	}
 
 	//! необходимо изменить тип аргумента метода renderComponent()
-	renderComponent(c: any) {
+	renderComponent = (c: IComponent) => {
 		c.render();
-	}
+	};
 
 	getStorageSettings() {
 		const snowBtn = document.querySelector('.settings-game__snow');

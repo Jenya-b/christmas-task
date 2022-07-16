@@ -21,4 +21,7 @@ export const appHomePage = new AppHomePage({
 			</div>
 		</div>
 	`,
+	render() {
+		return;
+	},
 });
