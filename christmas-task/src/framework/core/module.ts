@@ -110,7 +110,6 @@ export class Module {
 		}
 	}
 
-	//! необходимо изменить тип аргумента метода renderComponent()
 	renderComponent = (c: IComponent) => {
 		c.render();
 	};
